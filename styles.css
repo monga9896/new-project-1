@@ -1073,8 +1073,7 @@ body {
     order: 3 !important;
     width: 100% !important;
     max-width: 100% !important;
-    min-height: 290px !important;
-    margin: 0.25rem auto 0.75rem auto !important;
+    margin: 0.5rem auto 1rem auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -1097,35 +1096,42 @@ body {
     right: 0 !important;
   }
 
+  /* 100% Perfect 240px x 240px Square Stage for Circle & Logo */
   .hero-logo-standalone-container {
     position: relative !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 200px !important;
+    width: 240px !important;
+    height: 240px !important;
+    min-height: 240px !important;
+    max-width: 240px !important;
+    margin: 0 auto !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 auto !important;
-    text-align: center !important;
+    box-sizing: border-box !important;
   }
 
-  /* Perfectly Dead-Centered Glowing Circle Ring Behind Logo */
+  /* 220px Circle Backdrop: 10px Equal Spacing from All 4 Sides (Top, Bottom, Left, Right) */
   .logo-glow-ring {
-    width: 230px !important;
-    height: 230px !important;
+    width: 220px !important;
+    height: 220px !important;
+    position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    margin: 0 auto !important;
-    position: absolute !important;
+    margin: 0 !important;
     z-index: 1 !important;
   }
 
+  /* Standalone Logo: Absolute Dead-Center inside the 220px Circle */
   .hero-standalone-logo {
-    max-width: 175px !important;
-    position: relative !important;
+    max-width: 165px !important;
+    max-height: 110px !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
     z-index: 2 !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
     display: block !important;
   }
 
