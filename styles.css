@@ -1069,12 +1069,12 @@ body {
     box-sizing: border-box !important;
   }
 
-  /* Centered Circle Visual & Canvas Container */
+  /* Centered Circle Visual & Canvas Container (Pulled Upward to Eliminate Empty Space below Headline) */
   .hero-visual-wrapper {
     order: 3 !important;
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0.5rem auto 1rem auto !important;
+    margin: -0.25rem auto 0.5rem auto !important; /* Pulled upward towards headline */
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -1097,13 +1097,13 @@ body {
     right: 0 !important;
   }
 
-  /* 100% Perfect 240px x 240px Square Stage for Circle & Logo */
+  /* 260px x 260px Square Stage for Slightly Larger Circle & Logo */
   .hero-logo-standalone-container {
     position: relative !important;
-    width: 240px !important;
-    height: 240px !important;
-    min-height: 240px !important;
-    max-width: 240px !important;
+    width: 260px !important;
+    height: 260px !important;
+    min-height: 260px !important;
+    max-width: 260px !important;
     margin: 0 auto !important;
     display: flex !important;
     align-items: center !important;
@@ -1111,10 +1111,10 @@ body {
     box-sizing: border-box !important;
   }
 
-  /* 220px Circle Backdrop: 10px Equal Spacing from All 4 Sides (Top, Bottom, Left, Right) */
+  /* 245px Circle Backdrop (Slightly Larger Circle Size as requested) */
   .logo-glow-ring {
-    width: 220px !important;
-    height: 220px !important;
+    width: 245px !important;
+    height: 245px !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
@@ -1123,10 +1123,10 @@ body {
     z-index: 1 !important;
   }
 
-  /* Standalone Logo: Visually Centered inside the 220px Circle (Shifted 14px right to compensate for image bounds) */
+  /* Standalone Logo: Visually Centered inside the 245px Circle */
   .hero-standalone-logo {
-    max-width: 165px !important;
-    max-height: 110px !important;
+    max-width: 180px !important;
+    max-height: 120px !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
@@ -1136,13 +1136,13 @@ body {
     display: block !important;
   }
 
-  /* Compact & Centered 3 Analytics Cards (Shifted Significantly Upward to Overlap Lower Circle) */
+  /* Compact & Centered 3 Analytics Cards (Shifted Upward to Overlap Lower Circle Area) */
   .hero-analytics-cards-row {
     width: 100% !important;
     max-width: 100% !important;
     grid-template-columns: 1fr !important;
     gap: 0.5rem !important;
-    margin: -75px auto 0 auto !important; /* Shifted significantly upward to overlap lower circle area */
+    margin: -85px auto 0 auto !important; /* Overlaps lower part of 245px circle */
     padding: 0 !important;
     position: relative !important;
     z-index: 4 !important;
