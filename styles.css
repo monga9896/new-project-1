@@ -1136,14 +1136,16 @@ body {
     display: block !important;
   }
 
-  /* Compact & Centered 3 Analytics Cards */
+  /* Compact & Centered 3 Analytics Cards (Shifted Significantly Upward to Overlap Lower Circle) */
   .hero-analytics-cards-row {
     width: 100% !important;
     max-width: 100% !important;
     grid-template-columns: 1fr !important;
     gap: 0.5rem !important;
-    margin: 0.5rem auto 0 auto !important;
+    margin: -75px auto 0 auto !important; /* Shifted significantly upward to overlap lower circle area */
     padding: 0 !important;
+    position: relative !important;
+    z-index: 4 !important;
     box-sizing: border-box !important;
   }
 
@@ -1186,18 +1188,9 @@ body {
     font-size: 0.62rem !important;
   }
 
-  .hero-description {
-    order: 4 !important;
-    text-align: center !important;
-    margin: 0.4rem auto 0.75rem auto !important;
-    font-size: 0.95rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
+  /* CTA Buttons (Get Free Consultation & Our Services) Placed Directly BEFORE Paragraph */
   .hero-buttons {
-    order: 5 !important;
+    order: 4 !important;
     width: 100% !important;
     max-width: 100% !important;
     display: flex !important;
@@ -1205,7 +1198,7 @@ body {
     align-items: center !important;
     justify-content: center !important;
     gap: 0.75rem !important;
-    margin: 0.25rem auto 0 auto !important;
+    margin: 0.5rem auto 0.5rem auto !important;
     box-sizing: border-box !important;
   }
 
@@ -1213,6 +1206,17 @@ body {
     width: 100% !important;
     max-width: 340px !important;
     margin: 0 auto !important;
+  }
+
+  /* Description Paragraph ("We help businesses grow through SEO...") Placed AFTER Buttons */
+  .hero-description {
+    order: 5 !important;
+    text-align: center !important;
+    margin: 0.5rem auto 0.75rem auto !important;
+    font-size: 0.95rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .hero-trust-container {
