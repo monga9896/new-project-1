@@ -540,6 +540,7 @@ body {
   max-height: 160px;
   object-fit: contain;
   filter: drop-shadow(0 10px 25px rgba(6, 29, 73, 0.1));
+  transform: translateX(18px);
 }
 
 /* REPOSITIONED ANALYTICS CARDS ROW (POSITIONED BELOW LOGO) */
@@ -1122,14 +1123,14 @@ body {
     z-index: 1 !important;
   }
 
-  /* Standalone Logo: Absolute Dead-Center inside the 220px Circle */
+  /* Standalone Logo: Visually Centered inside the 220px Circle (Shifted 14px right to compensate for image bounds) */
   .hero-standalone-logo {
     max-width: 165px !important;
     max-height: 110px !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
-    transform: translate(-50%, -50%) !important;
+    transform: translate(calc(-50% + 14px), -50%) !important;
     z-index: 2 !important;
     margin: 0 !important;
     display: block !important;
