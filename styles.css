@@ -1017,11 +1017,18 @@ body {
     display: flex;
   }
 
-  /* Hero Section Mobile Order: Kicker -> Logo Circle Visual & Cards -> Buttons -> Title -> Description -> Trust Badges */
+  /* Hero Section Mobile Order: 
+     1. Kicker Badge
+     2. Headline (Slightly Smaller 1.75rem)
+     3. Logo Circle Visual (Compact 240px Circle) & Analytics Cards
+     4. Description Text
+     5. CTA Buttons (Get Free Consultation & Our Services)
+     6. 4 Trust Badges
+  */
   .hero-container {
     display: flex !important;
     flex-direction: column !important;
-    gap: 1rem !important;
+    gap: 0.85rem !important;
   }
 
   .hero-content {
@@ -1035,75 +1042,86 @@ body {
     justify-content: center !important;
   }
 
-  .hero-visual-wrapper {
+  /* Headline BEFORE Circle on Mobile, Slightly Smaller */
+  .hero-title {
     order: 2 !important;
+    font-size: 1.75rem !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+    margin: 0.4rem 0 !important;
+  }
+
+  /* Compact Circle Visual & Cards */
+  .hero-visual-wrapper {
+    order: 3 !important;
     width: 100% !important;
-    min-height: 340px !important;
-    margin: 0.35rem 0 0.75rem 0 !important;
+    min-height: 300px !important;
+    margin: 0.25rem 0 0.75rem 0 !important;
+  }
+
+  .logo-glow-ring {
+    width: 240px !important;
+    height: 240px !important;
+    top: 30% !important;
   }
 
   .hero-standalone-logo {
-    max-width: 220px !important;
+    max-width: 180px !important;
   }
 
-  /* Make the 3 Analytics Cards Compact on Mobile */
+  /* Compact 3 Analytics Cards */
   .hero-analytics-cards-row {
     grid-template-columns: 1fr !important;
-    gap: 0.6rem !important;
-    margin-top: 0.75rem !important;
+    gap: 0.5rem !important;
+    margin-top: 0.5rem !important;
   }
 
   .analytics-card {
-    padding: 0.65rem 0.85rem !important;
+    padding: 0.6rem 0.8rem !important;
     border-radius: 14px !important;
-    gap: 0.65rem !important;
+    gap: 0.6rem !important;
   }
 
   .card-icon-box {
-    width: 36px !important;
-    height: 36px !important;
+    width: 34px !important;
+    height: 34px !important;
     border-radius: 10px !important;
   }
 
   .card-icon-box svg {
-    width: 18px !important;
-    height: 18px !important;
+    width: 17px !important;
+    height: 17px !important;
   }
 
   .card-val {
-    font-size: 1.15rem !important;
+    font-size: 1.1rem !important;
   }
 
   .card-title {
-    font-size: 0.82rem !important;
+    font-size: 0.8rem !important;
   }
 
   .card-desc {
-    font-size: 0.7rem !important;
+    font-size: 0.68rem !important;
   }
 
   .sub-desc {
-    font-size: 0.65rem !important;
-  }
-
-  .hero-buttons {
-    order: 3 !important;
-    width: 100% !important;
-    flex-direction: column !important;
-    gap: 0.75rem !important;
-    margin-top: 0.5rem !important;
-  }
-
-  .hero-title {
-    order: 4 !important;
-    text-align: center !important;
-    margin-top: 0.75rem !important;
+    font-size: 0.62rem !important;
   }
 
   .hero-description {
-    order: 5 !important;
+    order: 4 !important;
     text-align: center !important;
-    margin: 0.5rem 0 0.75rem 0 !important;
+    margin: 0.4rem 0 0.75rem 0 !important;
+    font-size: 0.95rem !important;
+  }
+
+  .hero-buttons {
+    order: 5 !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    margin-top: 0.25rem !important;
   }
 
   .hero-trust-container {
