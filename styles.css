@@ -1148,6 +1148,8 @@ body {
     gap: 0.65rem !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
+    justify-content: center !important;
+    text-align: center !important;
   }
 
   .card-icon-box {
