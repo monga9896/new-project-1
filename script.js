@@ -1,0 +1,815 @@
+/**
+ * IDMR STRATEGIES - HERO SECTION INTERACTIVE ENGINE
+ * Features:
+ * - HTML5 Canvas Network & Dynamic Analytics Particles Engine
+ * - Mouse Parallax Visual Tilt
+ * - Animated Metric Counters
+ * - Sticky Navigation & Mobile Menu Toggle
+ * - Interactive Modal System (Consultation, Quote, Services)
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize all sub-engines
+  initNavbarScroll();
+  initMobileMenu();
+  initHeroCanvas();
+  initEcosystemCanvas();
+  initCounters();
+  initMouseParallax();
+  initModals();
+  initButtonRipples();
+  initTrustedMarquee();
+  initServicesFilter();
+  initPortfolioFilter();
+  initScrollSpy();
+  initContactForm();
+});
+
+/* ==========================================================================
+   1. NAVBAR SCROLL EFFECT
+   ========================================================================== */
+function initNavbarScroll() {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+
+  const handleScroll = () => {
+    if (window.scrollY > 20) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+}
+
+/* ==========================================================================
+   1B. SCROLL SPY ACTIVE LINK HIGHLIGHTER
+   ========================================================================== */
+function initScrollSpy() {
+  const sections = document.querySelectorAll('section[id], footer[id]');
+  const navLinks = document.querySelectorAll('.nav-links .nav-link');
+  if (!sections.length || !navLinks.length) return;
+
+  const handleSpy = () => {
+    let currentId = '';
+    const scrollPosition = window.scrollY + 160;
+
+    sections.forEach(section => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPosition >= top && scrollPosition < top + height) {
+        currentId = section.getAttribute('id');
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          link.classList.remove('active');
+          if (href === `#${currentId}`) {
+            link.classList.add('active');
+          }
+        }
+      });
+    }
+  };
+
+  window.addEventListener('scroll', handleSpy, { passive: true });
+}
+
+/* ==========================================================================
+   2. MOBILE MENU TOGGLE
+   ========================================================================== */
+function initMobileMenu() {
+  const toggleBtn = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (!toggleBtn || !mobileMenu) return;
+
+  toggleBtn.addEventListener('click', () => {
+    const isActive = mobileMenu.classList.contains('active');
+    if (isActive) {
+      mobileMenu.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    } else {
+      mobileMenu.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Close menu when link is clicked
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+  });
+}
+
+/* ==========================================================================
+   3. HTML5 CANVAS: DIGITAL PARTICLES, NETWORK NODES & ANALYTICS GRAPHS
+   ========================================================================== */
+function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let animationFrameId;
+
+  // Mouse tracker for particle attraction
+  const mouse = {
+    x: null,
+    y: null,
+    radius: 140
+  };
+
+  const particles = [];
+  const particleCount = 38;
+  
+  // Analytics curve parameters
+  let graphPhase = 0;
+
+  function resizeCanvas() {
+    const parent = canvas.parentElement;
+    const rect = parent.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    
+    width = rect.width;
+    height = rect.height;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+  }
+
+  // Particle Class
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.65;
+      this.vy = (Math.random() - 0.5) * 0.65;
+      this.radius = Math.random() * 2.2 + 1.5;
+      // 80% royal blue, 20% gold
+      this.color = Math.random() > 0.2 ? 'rgba(13, 110, 253, ' : 'rgba(212, 175, 55, ';
+      this.alpha = Math.random() * 0.45 + 0.2;
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Bounce on edges
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+
+      // Mouse interaction
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouse.radius) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          this.x -= (dx / dist) * force * 2;
+          this.y -= (dy / dist) * force * 2;
+        }
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `${this.color}${this.alpha})`;
+      ctx.fill();
+    }
+  }
+
+  // Create particles
+  function initParticles() {
+    particles.length = 0;
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  // Draw connecting network lines
+  function drawNetworkLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 100) {
+          const lineAlpha = (1 - dist / 100) * 0.22;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(13, 110, 253, ${lineAlpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  // Draw animated background analytics bar chart graphic (matching mockup)
+  function drawBackgroundBarGraph() {
+    graphPhase += 0.015;
+    
+    ctx.save();
+    
+    // Draw subtle vertical bars on lower right
+    const barCount = 12;
+    const barWidth = 14;
+    const gap = 10;
+    const startX = width * 0.05;
+    const startY = height * 0.88;
+
+    for (let i = 0; i < barCount; i++) {
+      const x = startX + i * (barWidth + gap);
+      const heightFactor = Math.sin(i * 0.4 + graphPhase) * 0.25 + 0.5 + (i / barCount) * 0.5;
+      const barHeight = heightFactor * (height * 0.28);
+      
+      const barGradient = ctx.createLinearGradient(0, startY - barHeight, 0, startY);
+      barGradient.addColorStop(0, 'rgba(13, 110, 253, 0.22)');
+      barGradient.addColorStop(1, 'rgba(13, 110, 253, 0.02)');
+      
+      ctx.fillStyle = barGradient;
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(x, startY - barHeight, barWidth, barHeight, 4) : ctx.rect(x, startY - barHeight, barWidth, barHeight);
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw subtle bar graph
+    drawBackgroundBarGraph();
+
+    // Draw particles & connections
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    drawNetworkLines();
+
+    animationFrameId = requestAnimationFrame(animate);
+  }
+
+  // Setup canvas
+  resizeCanvas();
+  initParticles();
+  animate();
+
+  // Resize listener
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+    initParticles();
+  });
+
+  // Track mouse over canvas parent
+  const parent = canvas.parentElement;
+  parent.addEventListener('mousemove', (e) => {
+    const rect = parent.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
+  parent.addEventListener('mouseleave', () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+}
+
+/* ==========================================================================
+   4. COUNTER ANIMATION ENGINE
+   ========================================================================== */
+function initCounters() {
+  const counters = document.querySelectorAll('.counter');
+  if (!counters.length) return;
+
+  const animateCounter = (el) => {
+    const target = parseFloat(el.getAttribute('data-target'));
+    const isFloat = target % 1 !== 0;
+    const duration = 2000;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const currentVal = target * ease;
+
+      el.textContent = isFloat ? currentVal.toFixed(1) : Math.floor(currentVal);
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        el.textContent = isFloat ? target.toFixed(1) : target;
+      }
+    }
+
+    requestAnimationFrame(update);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(counter => observer.observe(counter));
+}
+
+/* ==========================================================================
+   5. MOUSE PARALLAX TILT EFFECT
+   ========================================================================== */
+function initMouseParallax() {
+  const wrapper = document.getElementById('hero-visual-wrapper');
+  if (!wrapper) return;
+
+  const standaloneLogo = wrapper.querySelector('.hero-logo-standalone-container');
+
+  window.addEventListener('mousemove', (e) => {
+    const { innerWidth, innerHeight } = window;
+    const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
+    const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
+
+    if (standaloneLogo) {
+      standaloneLogo.style.transform = `perspective(1000px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(${y * -6}px)`;
+    }
+  });
+
+  window.addEventListener('mouseleave', () => {
+    if (standaloneLogo) {
+      standaloneLogo.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(0px)`;
+    }
+  });
+}
+
+/* ==========================================================================
+   6. MODALS MANAGEMENT
+   ========================================================================== */
+function initModals() {
+  // Consult Modal
+  const consultModal = document.getElementById('consult-modal');
+  const openConsultBtns = document.querySelectorAll('.open-consult-modal');
+  const closeConsultBtn = document.getElementById('close-consult-modal');
+
+  // Quote Modal
+  const quoteModal = document.getElementById('quote-modal');
+  const openQuoteBtns = document.querySelectorAll('.open-quote-modal');
+  const closeQuoteBtn = document.getElementById('close-quote-modal');
+
+  // Services Modal
+  const servicesModal = document.getElementById('services-modal');
+  const openServicesBtns = document.querySelectorAll('.open-services-modal, #nav-services-link, #mobile-services-link');
+  const closeServicesBtn = document.getElementById('close-services-modal');
+
+  function openModal(modal) {
+    if (modal) modal.classList.add('active');
+  }
+
+  function closeModal(modal) {
+    if (modal) modal.classList.remove('active');
+  }
+
+  openConsultBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal(servicesModal);
+      openModal(consultModal);
+    });
+  });
+
+  openQuoteBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(quoteModal);
+    });
+  });
+
+  openServicesBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(servicesModal);
+    });
+  });
+
+  if (closeConsultBtn) closeConsultBtn.addEventListener('click', () => closeModal(consultModal));
+  if (closeQuoteBtn) closeQuoteBtn.addEventListener('click', () => closeModal(quoteModal));
+  if (closeServicesBtn) closeServicesBtn.addEventListener('click', () => closeModal(servicesModal));
+
+  [consultModal, quoteModal, servicesModal].forEach(modal => {
+    if (!modal) return;
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal(modal);
+    });
+  });
+
+  const consultForm = document.getElementById('consult-form');
+  if (consultForm) {
+    consultForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you! Your free consultation request has been submitted. Our senior strategist will contact you within 24 hours.');
+      closeModal(consultModal);
+      consultForm.reset();
+    });
+  }
+
+  const quoteForm = document.getElementById('quote-form');
+  if (quoteForm) {
+    quoteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Proposal Request Received! We will prepare a customized pitch deck and estimate for your company.');
+      closeModal(quoteModal);
+      quoteForm.reset();
+    });
+  }
+
+  const scrollIndicator = document.getElementById('scroll-indicator');
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', () => {
+      openModal(servicesModal);
+    });
+  }
+}
+
+/* ==========================================================================
+   7. BUTTON RIPPLE EFFECT
+   ========================================================================== */
+function initButtonRipples() {
+  const buttons = document.querySelectorAll('.btn');
+  buttons.forEach(button => {
+    button.addEventListener('click', function (e) {
+      const circle = document.createElement('span');
+      const diameter = Math.max(button.clientWidth, button.clientHeight);
+      const radius = diameter / 2;
+
+      const rect = button.getBoundingClientRect();
+      circle.style.width = circle.style.height = `${diameter}px`;
+      circle.style.left = `${e.clientX - rect.left - radius}px`;
+      circle.style.top = `${e.clientY - rect.top - radius}px`;
+      circle.classList.add('ripple');
+
+      const ripple = button.getElementsByClassName('ripple')[0];
+      if (ripple) {
+        ripple.remove();
+      }
+
+      button.appendChild(circle);
+    });
+  });
+}
+
+/* ==========================================================================
+   8. ABOUT SECTION INTERACTIVE ILLUSTRATION CANVAS
+   ========================================================================== */
+/* ==========================================================================
+   8. DIGITAL MARKETING ECOSYSTEM CANVAS ENGINE (#eco-canvas)
+   ========================================================================== */
+function initEcosystemCanvas() {
+  const canvas = document.getElementById('eco-canvas');
+  if (!canvas) return;
+
+  const container = document.getElementById('eco-system-container');
+  if (!container) return;
+
+  const ctx = canvas.getContext('2d');
+  let width, height, centerX, centerY;
+
+  // Particle engine traveling along spokes
+  const particles = [];
+  const particleCount = 28;
+
+  function resize() {
+    const rect = container.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    width = rect.width;
+    height = rect.height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+
+    centerX = width / 2;
+    centerY = height / 2;
+  }
+
+  // Create traveling particles along 8 radial spokes
+  function initParticles() {
+    particles.length = 0;
+    const cards = container.querySelectorAll('.eco-node-card');
+    if (!cards.length) return;
+
+    for (let i = 0; i < particleCount; i++) {
+      const cardIdx = i % cards.length;
+      particles.push({
+        cardIdx: cardIdx,
+        progress: Math.random(),
+        speed: 0.003 + Math.random() * 0.004,
+        size: 2.5 + Math.random() * 2,
+        color: i % 3 === 0 ? '#0D6EFD' : (i % 3 === 1 ? '#D4AF37' : '#00D2FF')
+      });
+    }
+  }
+
+  let phase = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    phase += 0.012;
+
+    const cards = container.querySelectorAll('.eco-node-card');
+    const centerHubRadius = 92;
+
+    // 1. Draw subtle digital background grid & soft radial glow
+    const bgGlow = ctx.createRadialGradient(centerX, centerY, 30, centerX, centerY, width * 0.45);
+    bgGlow.addColorStop(0, 'rgba(13, 110, 253, 0.07)');
+    bgGlow.addColorStop(0.55, 'rgba(13, 110, 253, 0.02)');
+    bgGlow.addColorStop(1, 'transparent');
+    ctx.fillStyle = bgGlow;
+    ctx.fillRect(0, 0, width, height);
+
+    // 2. Draw Concentric Orbital Rings (matching reference image)
+    const ringRadii = [135, 185, 235];
+    ringRadii.forEach((r, idx) => {
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(13, 110, 253, ${0.14 - idx * 0.03})`;
+      ctx.lineWidth = 1;
+      ctx.setLineDash(idx === 1 ? [4, 6] : [6, 8]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+
+    // Outer subtle orbital ring node dots
+    ringRadii.forEach((r, idx) => {
+      const dotCount = 6 + idx * 4;
+      for (let d = 0; d < dotCount; d++) {
+        const dotAngle = (d / dotCount) * Math.PI * 2 + phase * (idx % 2 === 0 ? 0.3 : -0.2);
+        const dx = centerX + Math.cos(dotAngle) * r;
+        const dy = centerY + Math.sin(dotAngle) * r;
+        ctx.beginPath();
+        ctx.arc(dx, dy, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(13, 110, 253, 0.32)';
+        ctx.fill();
+      }
+    });
+
+    // 3. Measure Node Card Position & Draw Spokes to Center Hub
+    const nodeCoords = [];
+
+    cards.forEach((card) => {
+      const cardRect = card.getBoundingClientRect();
+      const contRect = container.getBoundingClientRect();
+      
+      const nx = (cardRect.left + cardRect.width / 2) - contRect.left;
+      const ny = (cardRect.top + cardRect.height / 2) - contRect.top;
+
+      nodeCoords.push({ x: nx, y: ny });
+
+      // Calculate direction to center
+      const dx = centerX - nx;
+      const dy = centerY - ny;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist > 0) {
+        // Point on center hub boundary
+        const hx = centerX - (dx / dist) * centerHubRadius;
+        const hy = centerY - (dy / dist) * centerHubRadius;
+
+        // Draw connecting line
+        ctx.beginPath();
+        ctx.moveTo(nx, ny);
+        ctx.lineTo(hx, hy);
+        ctx.strokeStyle = 'rgba(13, 110, 253, 0.28)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Draw glowing dot at center hub attachment point
+        ctx.beginPath();
+        ctx.arc(hx, hy, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#0D6EFD';
+        ctx.shadowColor = '#0D6EFD';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Draw node attachment dot
+        ctx.beginPath();
+        ctx.arc(nx, ny, 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#0D6EFD';
+        ctx.fill();
+      }
+    });
+
+    // 4. Update & Draw Traveling Data Flow Particles
+    particles.forEach(p => {
+      if (!nodeCoords[p.cardIdx]) return;
+      
+      const node = nodeCoords[p.cardIdx];
+      const dx = node.x - centerX;
+      const dy = node.y - centerY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist > 0) {
+        // Move particle
+        p.progress += p.speed;
+        if (p.progress > 1) p.progress = 0;
+
+        // Position between center hub and node card
+        const startR = centerHubRadius;
+        const endR = dist;
+        const currentR = startR + (endR - startR) * p.progress;
+
+        const angle = Math.atan2(dy, dx);
+        const px = centerX + Math.cos(angle) * currentR;
+        const py = centerY + Math.sin(angle) * currentR;
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 10;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  initParticles();
+  draw();
+
+  window.addEventListener('resize', () => {
+    resize();
+    initParticles();
+  });
+}
+
+/* ==========================================================================
+   9. TRUSTED BY / WE WORKED WITH LOGO MARQUEE ENGINE (REFERENCE MATCHED)
+   ========================================================================== */
+function initTrustedMarquee() {
+  const track = document.getElementById('marquee-track');
+  const container = document.getElementById('marquee-container');
+
+  if (!track || !container) return;
+
+  // Seamless infinite loop: Clone initial set of logo pill cards twice
+  const initialCards = Array.from(track.children);
+  initialCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    track.appendChild(clone);
+  });
+
+  // Touch Swipe & Drag support
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  container.addEventListener('mousedown', (e) => {
+    isDown = true;
+    container.classList.add('active');
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+  });
+
+  container.addEventListener('mouseleave', () => {
+    isDown = false;
+  });
+
+  container.addEventListener('mouseup', () => {
+    isDown = false;
+  });
+
+  container.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 2;
+    container.scrollLeft = scrollLeft - walk;
+  });
+}
+
+/* ==========================================================================
+   10. OUR SERVICES CATEGORY FILTER ENGINE
+   ========================================================================== */
+function initServicesFilter() {
+  const filterBar = document.getElementById('services-filter');
+  const grid = document.getElementById('services-grid');
+
+  if (!filterBar || !grid) return;
+
+  const buttons = filterBar.querySelectorAll('.service-filter-btn');
+  const cards = grid.querySelectorAll('.service-card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Toggle active class on filter buttons
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterVal = btn.getAttribute('data-filter');
+
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filterVal === 'all' || category === filterVal) {
+          card.classList.remove('hidden');
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+}
+
+/* ==========================================================================
+   11. PORTFOLIO CATEGORY FILTER ENGINE
+   ========================================================================== */
+function initPortfolioFilter() {
+  const filterBar = document.getElementById('portfolio-filter');
+  const grid = document.getElementById('portfolio-grid');
+
+  if (!filterBar || !grid) return;
+
+  const buttons = filterBar.querySelectorAll('.portfolio-filter-btn');
+  const cards = grid.querySelectorAll('.portfolio-card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterVal = btn.getAttribute('data-filter');
+
+      cards.forEach(card => {
+        const categories = card.getAttribute('data-category').split(' ');
+        if (filterVal === 'all' || categories.includes(filterVal)) {
+          card.classList.remove('hidden');
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+}
+
+/* ==========================================================================
+   12. MAIN CONTACT FORM SUBMISSION ENGINE
+   ========================================================================== */
+function initContactForm() {
+  const form = document.getElementById('main-contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.contact-submit-btn');
+    if (btn) {
+      const originalHtml = btn.innerHTML;
+      btn.innerHTML = '<span>Sending Request...</span>';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML = '<span>✓ Request Sent Successfully!</span>';
+        btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+        form.reset();
+
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3500);
+      }, 1200);
+    }
+  });
+}
+

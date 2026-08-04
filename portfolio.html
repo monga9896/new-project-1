@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IDMR Strategies | Our Portfolio & Case Studies</title>
+  <meta name="description" content="Explore IDMR Strategies' portfolio of data-driven digital marketing, SEO, Google Ads, website development, AI automation, and market research projects.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="portfolio-page">
+  
+  <!-- Ambient Light Orbs & Grid Overlay -->
+  <div class="ambient-light light-orb-1" aria-hidden="true"></div>
+  <div class="ambient-light light-orb-2" aria-hidden="true"></div>
+  <div class="ambient-light light-orb-3" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <!-- Sticky Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo" aria-label="IDMR Strategies Home">
+        <img src="assets/official_idmr_logo_transparent.png" alt="IDMR Strategies Official Logo" class="nav-official-logo" height="72" style="height: 72px !important; max-height: 72px !important; width: auto !important; max-width: 320px !important;">
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-links" id="nav-links">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="index.html#trusted-by" class="nav-link">Clients</a>
+        <a href="portfolio.html" class="nav-link active">Portfolio</a>
+      </nav>
+
+      <!-- Nav CTA Button & Mobile Toggle -->
+      <div class="nav-actions">
+        <button class="btn btn-nav-cta open-quote-modal" id="nav-quote-btn">
+          <span>Get Quote</span>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Navigation -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <nav class="mobile-nav-links">
+        <a href="index.html#home" class="mobile-nav-link">Home</a>
+        <a href="index.html#about" class="mobile-nav-link">About</a>
+        <a href="index.html#services" class="mobile-nav-link">Services</a>
+        <a href="index.html#trusted-by" class="mobile-nav-link">Clients</a>
+        <a href="portfolio.html" class="mobile-nav-link active">Portfolio</a>
+      </nav>
+      <div class="mobile-menu-cta">
+        <button class="btn btn-primary open-consult-modal w-full">
+          Get Free Consultation
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PAGE WRAPPER -->
+  <main class="main-content">
+    
+    <!-- PORTFOLIO HERO BANNER -->
+    <section class="portfolio-hero-section">
+      <div class="section-container text-center">
+        <span class="kicker-badge gold-kicker fade-up">
+          <svg class="badge-sparkle" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          OUR PORTFOLIO
+        </span>
+        <h1 class="hero-title fade-up delay-1">
+          Our Work Speaks Through <br><span class="gradient-text">Measurable Results</span>
+        </h1>
+        <p class="hero-lead-para text-center fade-up delay-2">
+          Explore a selection of our digital marketing, branding, website development, AI automation, and market research projects. Every project reflects our commitment to innovation, data-driven decision making, and sustainable business growth.
+        </p>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO GRID SECTION WITH CATEGORY FILTERS -->
+    <section class="portfolio-section" id="portfolio">
+      <div class="section-container">
+        
+        <!-- Category Filter Tabs Bar -->
+        <div class="portfolio-filter-bar fade-up" id="portfolio-filter">
+          <button class="portfolio-filter-btn active" data-filter="all">All Projects</button>
+          <button class="portfolio-filter-btn" data-filter="seo">SEO</button>
+          <button class="portfolio-filter-btn" data-filter="gads">Google Ads</button>
+          <button class="portfolio-filter-btn" data-filter="meta">Meta Ads</button>
+          <button class="portfolio-filter-btn" data-filter="web">Website Development</button>
+          <button class="portfolio-filter-btn" data-filter="branding">Branding</button>
+          <button class="portfolio-filter-btn" data-filter="ai">AI Automation</button>
+          <button class="portfolio-filter-btn" data-filter="research">Market Research</button>
+        </div>
+
+        <!-- 6 Featured Portfolio Cards (3x2 Desktop Grid) -->
+        <div class="portfolio-grid fade-up delay-1" id="portfolio-grid">
+          
+          <!-- Project 1: Educational Institution Digital Growth -->
+          <div class="portfolio-card" data-category="seo gads web">
+            <div class="portfolio-img-wrapper">
+              <div class="portfolio-img-bg edu-bg">
+                <div class="img-preview-mockup">
+                  <div class="mockup-bar"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
+                  <div class="mockup-chart-graph">
+                    <span class="bar b1" style="height: 40%"></span>
+                    <span class="bar b2" style="height: 65%"></span>
+                    <span class="bar b3" style="height: 90%"></span>
+                    <span class="bar b4" style="height: 100%"></span>
+                  </div>
+                </div>
+              </div>
+              <span class="result-badge">+250% Organic Traffic</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-meta">
+                <span class="portfolio-cat-tag">SEO • Website • Google Ads</span>
+                <span class="portfolio-industry">Education & E-Learning</span>
+              </div>
+              <h3 class="portfolio-title">Educational Institution Digital Growth</h3>
+              <p class="portfolio-desc">
+                Scaled student enrollment and organic visibility through technical SEO restructuring, targeted Google Ads campaigns, and a high-converting web portal.
+              </p>
+              <button class="btn-portfolio-link open-modal-btn">
+                <span>View Case Study</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 2: Healthcare Brand Marketing -->
+          <div class="portfolio-card" data-category="meta branding">
+            <div class="portfolio-img-wrapper">
+              <div class="portfolio-img-bg health-bg">
+                <div class="img-preview-mockup">
+                  <div class="mockup-bar"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
+                  <div class="mockup-circle-metric">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="3.5"/>
+                      <path class="circle" stroke-dasharray="88, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#0D6EFD" stroke-width="3.5"/>
+                    </svg>
+                    <span class="metric-text">4.8X</span>
+                  </div>
+                </div>
+              </div>
+              <span class="result-badge gold-badge">4.8X ROAS</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-meta">
+                <span class="portfolio-cat-tag">Meta Ads • Branding</span>
+                <span class="portfolio-industry">Healthcare & Wellness</span>
+              </div>
+              <h3 class="portfolio-title">Healthcare Brand Marketing</h3>
+              <p class="portfolio-desc">
+                Rebranded a regional healthcare network and deployed high-converting Facebook & Instagram ad funnels for patient acquisition.
+              </p>
+              <button class="btn-portfolio-link open-modal-btn">
+                <span>View Case Study</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 3: eCommerce Performance Campaign -->
+          <div class="portfolio-card" data-category="gads meta">
+            <div class="portfolio-img-wrapper">
+              <div class="portfolio-img-bg ecom-bg">
+                <div class="img-preview-mockup">
+                  <div class="mockup-bar"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
+                  <div class="mockup-pulse-lines">
+                    <span class="p-line"></span>
+                    <span class="p-line w-75"></span>
+                    <span class="p-line w-90"></span>
+                  </div>
+                </div>
+              </div>
+              <span class="result-badge">+320% Sales</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-meta">
+                <span class="portfolio-cat-tag">Performance Marketing</span>
+                <span class="portfolio-industry">Retail & eCommerce</span>
+              </div>
+              <h3 class="portfolio-title">eCommerce Performance Campaign</h3>
+              <p class="portfolio-desc">
+                Engineered full-funnel shopping ad strategies across Google Shopping, Meta Dynamic Catalog Ads, and email remarketing.
+              </p>
+              <button class="btn-portfolio-link open-modal-btn">
+                <span>View Case Study</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 4: Corporate Website Development -->
+          <div class="portfolio-card" data-category="web">
+            <div class="portfolio-img-wrapper">
+              <div class="portfolio-img-bg web-bg">
+                <div class="img-preview-mockup">
+                  <div class="mockup-bar"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
+                  <div class="mockup-speed-gauge">
+                    <span class="gauge-num">98</span>
+                    <span class="gauge-lbl">PageSpeed</span>
+                  </div>
+                </div>
+              </div>
+              <span class="result-badge gold-badge">95+ PageSpeed Score</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-meta">
+                <span class="portfolio-cat-tag">UI/UX • Development</span>
+                <span class="portfolio-industry">Enterprise & SaaS</span>
+              </div>
+              <h3 class="portfolio-title">Corporate Website Development</h3>
+              <p class="portfolio-desc">
+                Architected a modern, lightning-fast corporate website with interactive UI components, seamless CMS, and 95+ PageSpeed scores.
+              </p>
+              <button class="btn-portfolio-link open-modal-btn">
+                <span>View Case Study</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 5: AI Business Automation -->
+          <div class="portfolio-card" data-category="ai">
+            <div class="portfolio-img-wrapper">
+              <div class="portfolio-img-bg ai-bg">
+                <div class="img-preview-mockup">
+                  <div class="mockup-bar"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
+                  <div class="mockup-ai-chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#00D2FF" stroke-width="2">
+                      <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                      <rect x="9" y="9" width="6" height="6"></rect>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <span class="result-badge">65% Time Saved</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-meta">
+                <span class="portfolio-cat-tag">AI Automation</span>
+                <span class="portfolio-industry">B2B Services & CRM</span>
+              </div>
+              <h3 class="portfolio-title">AI Business Automation</h3>
+              <p class="portfolio-desc">
+                Implemented custom AI lead qualification workflows, CRM automated sync, and automated client onboarding pipelines.
+              </p>
+              <button class="btn-portfolio-link open-modal-btn">
+                <span>View Case Study</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 6: Market Research Project -->
+          <div class="portfolio-card" data-category="research">
+            <div class="portfolio-img-wrapper">
+              <div class="portfolio-img-bg research-bg">
+                <div class="img-preview-mockup">
+                  <div class="mockup-bar"><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
+                  <div class="mockup-radar-box">
+                    <div class="radar-circle"></div>
+                    <div class="radar-line"></div>
+                  </div>
+                </div>
+              </div>
+              <span class="result-badge gold-badge">Actionable Insights</span>
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-meta">
+                <span class="portfolio-cat-tag">Research & Analytics</span>
+                <span class="portfolio-industry">Financial Technology</span>
+              </div>
+              <h3 class="portfolio-title">Market Research Project</h3>
+              <p class="portfolio-desc">
+                Conducted nationwide consumer sentiment surveys and competitor intelligence mapping to guide product expansion.
+              </p>
+              <button class="btn-portfolio-link open-modal-btn">
+                <span>View Case Study</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FULL-WIDTH FEATURED CASE STUDY SHOWCASE -->
+        <div class="featured-case-study-card fade-up delay-2">
+          <div class="featured-cs-grid">
+            
+            <!-- Left Side: Interactive Preview Illustration -->
+            <div class="featured-cs-image-col">
+              <div class="cs-image-box">
+                <div class="cs-glass-dash">
+                  <div class="dash-top-bar">
+                    <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+                    <span class="dash-title-txt">Enterprise Growth Analytics Dashboard</span>
+                  </div>
+                  <div class="dash-metrics-row">
+                    <div class="dash-kpi-pill"><span class="kpi-num">+340%</span> <span class="kpi-lbl">ROI</span></div>
+                    <div class="dash-kpi-pill"><span class="kpi-num">5.2X</span> <span class="kpi-lbl">ROAS</span></div>
+                    <div class="dash-kpi-pill"><span class="kpi-num">+250%</span> <span class="kpi-lbl">Traffic</span></div>
+                  </div>
+                  <div class="dash-chart-visual">
+                    <svg viewBox="0 0 400 120" fill="none">
+                      <path d="M0,100 Q100,20 200,60 T400,10" stroke="#0D6EFD" stroke-width="3" fill="none"/>
+                      <path d="M0,100 Q100,20 200,60 T400,10 L400,120 L0,120 Z" fill="url(#dashChartGrad)" opacity="0.25"/>
+                      <defs>
+                        <linearGradient id="dashChartGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#0D6EFD"/>
+                          <stop offset="100%" stop-color="transparent"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Detailed Project Overview -->
+            <div class="featured-cs-content-col">
+              <div class="featured-badge">FLAGSHIP CASE STUDY</div>
+              <h3 class="featured-cs-heading">Enterprise Digital Transformation & Omnichannel Growth</h3>
+              
+              <div class="cs-details-list">
+                <div class="cs-detail-item">
+                  <strong>Client Industry:</strong> Global Healthcare & Diagnostics Network
+                </div>
+                <div class="cs-detail-item">
+                  <strong>Business Challenge:</strong> High customer acquisition costs and fragmented lead management across 15+ regional hubs.
+                </div>
+                <div class="cs-detail-item">
+                  <strong>Our Solution:</strong> Unified AI CRM integration, automated Google & Meta ad funnels, and high-converting web portals.
+                </div>
+                <div class="cs-detail-item">
+                  <strong>Tech Stack:</strong> Next.js, GA4, Meta Pixel, Python AI Engine, HubSpot CRM
+                </div>
+              </div>
+
+              <!-- Animated KPI Cards Grid -->
+              <div class="featured-kpis-grid">
+                <div class="kpi-card">
+                  <div class="kpi-value"><span class="counter" data-target="340">0</span>%</div>
+                  <div class="kpi-name">Campaign ROI</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-value"><span class="counter" data-target="250">0</span>%</div>
+                  <div class="kpi-name">Organic Traffic</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-value">5.2X</div>
+                  <div class="kpi-name">Ad ROAS</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-value"><span class="counter" data-target="180">0</span>%</div>
+                  <div class="kpi-name">Qualified Leads</div>
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-glow open-modal-btn cta-full-cs-btn">
+                <span>Read Full Case Study</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RESULTS & IMPACT METRICS SECTION -->
+    <section class="portfolio-results-section">
+      <div class="section-container">
+        
+        <div class="section-header text-center fade-up">
+          <span class="kicker-badge gold-kicker">PROVEN TRACK RECORD</span>
+          <h2 class="section-headline">Quantifiable <span class="gradient-text">Business Impact</span></h2>
+          <p class="section-lead-para text-center">
+            Driven by data precision, creative excellence, and continuous optimization across every campaign.
+          </p>
+        </div>
+
+        <div class="results-stats-grid fade-up delay-1">
+          
+          <div class="result-stat-card">
+            <div class="stat-icon-wrapper blue-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+            </div>
+            <div class="stat-number">+<span class="counter" data-target="250">0</span>%</div>
+            <div class="stat-label">Organic Traffic Growth</div>
+            <p class="stat-subtext">Average organic traffic increase within the first 6 months of SEO execution.</p>
+          </div>
+
+          <div class="result-stat-card">
+            <div class="stat-icon-wrapper gold-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="stat-number">+<span class="counter" data-target="340">0</span>%</div>
+            <div class="stat-label">Campaign ROI</div>
+            <p class="stat-subtext">Return on ad spend across performance marketing campaigns.</p>
+          </div>
+
+          <div class="result-stat-card">
+            <div class="stat-icon-wrapper blue-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div class="stat-number"><span class="counter" data-target="10000">0</span>+</div>
+            <div class="stat-label">Leads Generated</div>
+            <p class="stat-subtext">High-intent qualified leads delivered to our corporate clients annually.</p>
+          </div>
+
+          <div class="result-stat-card">
+            <div class="stat-icon-wrapper gold-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="stat-number">+<span class="counter" data-target="85">0</span>%</div>
+            <div class="stat-label">Conversion Rate Lift</div>
+            <p class="stat-subtext">Optimized landing page conversion improvements post-redesign.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CLIENT TESTIMONIALS SECTION -->
+    <section class="portfolio-testimonials-section">
+      <div class="section-container">
+        
+        <div class="section-header text-center fade-up">
+          <span class="kicker-badge gold-kicker">CLIENT TRUST</span>
+          <h2 class="section-headline">What Our <span class="gradient-text">Clients Say</span></h2>
+          <p class="section-lead-para text-center">
+            Hear directly from business leaders who achieved sustainable market authority with IDMR Strategies.
+          </p>
+        </div>
+
+        <div class="testimonials-grid fade-up delay-1">
+          
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">
+              "IDMR transformed our digital acquisition channels, cutting customer acquisition costs by 42% while scaling monthly lead volume by 3.5X. Truly exceptional partners."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar blue-avatar">MV</div>
+              <div class="author-info">
+                <h4 class="author-name">Dr. Marcus Vance</h4>
+                <p class="author-title">VP of Marketing, Global Healthcare Network</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">
+              "The SEO restructuring and website redesign executed by IDMR brought over 250% organic traffic growth within 6 months. Their research-first methodology is unbeatable."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar gold-avatar">ER</div>
+              <div class="author-info">
+                <h4 class="author-name">Elena Rostova</h4>
+                <p class="author-title">Chief Growth Officer, EduTech International</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">
+              "IDMR's AI automation and performance ad funnels delivered a 4.8X ROAS for our product launches. Their transparency and daily reporting build absolute trust."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar blue-avatar">DC</div>
+              <div class="author-info">
+                <h4 class="author-name">David Chen</h4>
+                <p class="author-title">Founder & CEO, NexaTech SaaS</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PORTFOLIO FINAL CTA BANNER -->
+    <section class="portfolio-cta-section">
+      <div class="section-container">
+        
+        <div class="portfolio-cta-banner fade-up">
+          <div class="cta-banner-glow"></div>
+          <div class="cta-content text-center">
+            <h2 class="cta-title">Ready to Make Your Business Our Next Success Story?</h2>
+            <p class="cta-subtitle">
+              Let's create measurable growth through data-driven digital marketing, AI-powered automation, and innovative strategies.
+            </p>
+            <div class="cta-btn-group">
+              <button class="btn btn-primary btn-glow open-modal-btn">Start Your Project</button>
+              <button class="btn btn-secondary glass-btn open-modal-btn">Book a Free Strategy Call</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       BRAND-NEW PREMIUM 3-COLUMN CONTACT SECTION
+       ========================================================================== -->
+  <section class="pcontact-section" id="contact">
+    <div class="pcontact-container">
+      
+      <!-- Section Header -->
+      <div class="pcontact-header text-center fade-up">
+        <div class="pcontact-badge">GET IN TOUCH</div>
+        <h2 class="pcontact-title">Let's Build Something Amazing Together</h2>
+        <p class="pcontact-subtitle">Whether you're looking for digital marketing, branding, AI automation, website development, or market research, our team is ready to accelerate your business growth.</p>
+      </div>
+
+      <!-- 3-Column Layout (max-width: 1280px container) -->
+      <div class="pcontact-grid fade-up delay-1">
+        
+        <!-- LEFT COLUMN: Contact Form Card -->
+        <div class="pcontact-col pcontact-form-card">
+          <h3 class="pcontact-card-title">Let's Discuss Your Project</h3>
+          <p class="pcontact-card-desc">Fill out the form below and our strategy team will reach out within 24 hours.</p>
+          
+          <form class="pcontact-form" id="pcontact-portfolio-form">
+            <div class="pcontact-field">
+              <label for="pcontact-port-name">Full Name *</label>
+              <input type="text" id="pcontact-port-name" class="pcontact-input" placeholder="e.g. Rahul Sharma" required>
+            </div>
+
+            <div class="pcontact-field">
+              <label for="pcontact-port-email">Work Email *</label>
+              <input type="email" id="pcontact-port-email" class="pcontact-input" placeholder="rahul@company.com" required>
+            </div>
+
+            <div class="pcontact-field">
+              <label for="pcontact-port-phone">Phone Number *</label>
+              <input type="tel" id="pcontact-port-phone" class="pcontact-input" placeholder="+91 98765 43210" required>
+            </div>
+
+            <div class="pcontact-field">
+              <label for="pcontact-port-company">Company / Organization</label>
+              <input type="text" id="pcontact-port-company" class="pcontact-input" placeholder="Your Business Name">
+            </div>
+
+            <div class="pcontact-field full-width">
+              <label for="pcontact-port-message">Message *</label>
+              <textarea id="pcontact-port-message" class="pcontact-textarea" rows="4" placeholder="Tell us about your project goals or growth challenges..." required></textarea>
+            </div>
+
+            <button type="submit" class="pcontact-submit-btn">
+              <span>Get Free Consultation</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="pcontact-btn-arrow">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- CENTER COLUMN: Office Information Card -->
+        <div class="pcontact-col pcontact-info-card">
+          <h3 class="pcontact-card-title">Office Information</h3>
+          <p class="pcontact-card-desc">Visit our headquarters or connect with us directly via phone & email.</p>
+          
+          <div class="pcontact-info-list">
+            
+            <div class="pcontact-info-item">
+              <div class="pcontact-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <div class="pcontact-info-text">
+                <span class="pcontact-info-label">Office Address</span>
+                <strong>Mohali, Punjab, India</strong>
+              </div>
+            </div>
+
+            <div class="pcontact-info-item">
+              <div class="pcontact-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div class="pcontact-info-text">
+                <span class="pcontact-info-label">Phone Number</span>
+                <a href="tel:+918383897274">+91 8383897274</a>
+              </div>
+            </div>
+
+            <div class="pcontact-info-item">
+              <div class="pcontact-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <div class="pcontact-info-text">
+                <span class="pcontact-info-label">Email Address</span>
+                <a href="mailto:idmrstrategies@gmail.com">idmrstrategies@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="pcontact-info-item">
+              <div class="pcontact-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div class="pcontact-info-text">
+                <span class="pcontact-info-label">Business Hours</span>
+                <strong>Monday – Saturday: 9:00 AM – 6:00 PM</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <a href="https://maps.google.com/?q=Mohali,Punjab,India" target="_blank" rel="noopener" class="pcontact-map-btn">
+            <span>Google Maps</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="pcontact-map-arrow"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
+        </div>
+
+        <!-- RIGHT COLUMN: Why Contact IDMR + Social Media -->
+        <div class="pcontact-col pcontact-features-col">
+          <h3 class="pcontact-card-title">Why Contact IDMR</h3>
+          <p class="pcontact-card-desc">Partner with a strategic agency dedicated to your success.</p>
+          
+          <div class="pcontact-features-grid">
+            <div class="pcontact-feature-card">
+              <span class="pcontact-feature-emoji">⚡</span>
+              <div>
+                <h4>Fast Response</h4>
+                <p>Guaranteed response within 24 hours.</p>
+              </div>
+            </div>
+
+            <div class="pcontact-feature-card">
+              <span class="pcontact-feature-emoji">📈</span>
+              <div>
+                <h4>Growth Focused</h4>
+                <p>Strategies engineered to scale ROI.</p>
+              </div>
+            </div>
+
+            <div class="pcontact-feature-card">
+              <span class="pcontact-feature-emoji">🤝</span>
+              <div>
+                <h4>Dedicated Support</h4>
+                <p>1-on-1 strategy & account managers.</p>
+              </div>
+            </div>
+
+            <div class="pcontact-feature-card">
+              <span class="pcontact-feature-emoji">💡</span>
+              <div>
+                <h4>Research Based</h4>
+                <p>Backed by data & market research.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Media Block -->
+          <div class="pcontact-social-section">
+            <h4 class="pcontact-social-title">Connect With Us</h4>
+            <div class="pcontact-social-icons">
+              <a href="#" class="pcontact-social-btn" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+              <a href="#" class="pcontact-social-btn" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+              </a>
+              <a href="#" class="pcontact-social-btn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.7a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/></svg>
+              </a>
+              <a href="#" class="pcontact-social-btn" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>
+              <a href="#" class="pcontact-social-btn" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       WORLD-CLASS ENTERPRISE CORPORATE FOOTER (.idmr-premium-footer)
+       ========================================================================== -->
+  <footer class="idmr-premium-footer" id="footer">
+    <div class="idmr-footer-container">
+      
+      <!-- PRE-FOOTER CTA CARD -->
+      <div class="idmr-footer-cta-card">
+        <div>
+          <span class="cta-card-badge">⭐ TOP-RATED DIGITAL & RESEARCH AGENCY</span>
+          <h3 class="cta-card-title">Ready to Accelerate Your Business Growth?</h3>
+          <p class="cta-card-subtitle">Connect with our senior growth strategists and receive a customized, data-backed roadmap for your company.</p>
+        </div>
+        <div class="cta-card-btns">
+          <a href="#consult-modal" class="cta-btn-gold open-modal-btn">
+            <span>Get Free Consultation</span>
+            <span>→</span>
+          </a>
+          <a href="portfolio.html" class="cta-btn-glass">View Case Studies</a>
+        </div>
+      </div>
+
+      <!-- 4-COLUMN MAIN FOOTER GRID -->
+      <div class="idmr-footer-grid">
+        
+        <!-- COLUMN 1: BRAND IDENTITY & SOCIAL -->
+        <div class="idmr-footer-col">
+          <div class="footer-logo-box">
+            <img src="assets/official_idmr_logo.png" alt="IDMR Strategies Logo" class="footer-logo-img">
+          </div>
+          
+          <p class="footer-brand-desc">
+            IDMR Strategies is a premier digital marketing & market research agency dedicated to scaling brand revenue through SEO, performance media, AI funnels, and consumer insights.
+          </p>
+
+          <div class="footer-status-pill">
+            <span class="status-dot-pulse"></span>
+            <span>ACCEPTING NEW ENTERPRISE CLIENTS</span>
+          </div>
+
+          <div class="footer-social-icons">
+            <a href="#" class="footer-social-btn" aria-label="Instagram">
+              <svg width="18" height="18" style="width:18px !important; height:18px !important; max-width:18px !important; max-height:18px !important;" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="Facebook">
+              <svg width="18" height="18" style="width:18px !important; height:18px !important; max-width:18px !important; max-height:18px !important;" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="LinkedIn">
+              <svg width="18" height="18" style="width:18px !important; height:18px !important; max-width:18px !important; max-height:18px !important;" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.7a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="YouTube">
+              <svg width="18" height="18" style="width:18px !important; height:18px !important; max-width:18px !important; max-height:18px !important;" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="X (Twitter)">
+              <svg width="18" height="18" style="width:18px !important; height:18px !important; max-width:18px !important; max-height:18px !important;" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- COLUMN 2: SERVICES -->
+        <div class="idmr-footer-col">
+          <h4 class="idmr-footer-heading">Services & Solutions</h4>
+          <ul class="idmr-footer-list">
+            <li><a href="index.html#services"><span class="list-dot">•</span> Search Engine Optimization</a></li>
+            <li><a href="index.html#services"><span class="list-dot">•</span> Google & Meta Paid Ads</a></li>
+            <li><a href="index.html#services"><span class="list-dot">•</span> Website Engineering & UX</a></li>
+            <li><a href="index.html#services"><span class="list-dot">•</span> AI & Funnel Automation</a></li>
+            <li><a href="index.html#services"><span class="list-dot">•</span> Market & Competitor Research</a></li>
+            <li><a href="index.html#services"><span class="list-dot">•</span> Corporate Branding & Strategy</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 3: QUICK NAVIGATION -->
+        <div class="idmr-footer-col">
+          <h4 class="idmr-footer-heading">Quick Links</h4>
+          <ul class="idmr-footer-list">
+            <li><a href="index.html#home"><span class="list-dot">•</span> Home</a></li>
+            <li><a href="index.html#about"><span class="list-dot">•</span> About IDMR</a></li>
+            <li><a href="portfolio.html"><span class="list-dot">•</span> Portfolio & Case Studies</a></li>
+            <li><a href="index.html#trusted-by"><span class="list-dot">•</span> We Worked With</a></li>
+            <li><a href="#consult-modal" class="open-modal-btn"><span class="list-dot">•</span> Free Growth Audit</a></li>
+            <li><a href="#contact"><span class="list-dot">•</span> Contact Strategy Team</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 4: DIRECT CONTACT CARD -->
+        <div class="idmr-footer-col">
+          <h4 class="idmr-footer-heading">Get In Touch</h4>
+          <div class="footer-contact-card">
+            
+            <div class="footer-info-item">
+              <div class="footer-info-icon">📍</div>
+              <div class="footer-info-text">
+                <span>Headquarters</span>
+                <strong>Mohali, Punjab, India</strong>
+              </div>
+            </div>
+
+            <div class="footer-info-item">
+              <div class="footer-info-icon">📞</div>
+              <div class="footer-info-text">
+                <span>Direct Line</span>
+                <a href="tel:+918383897274">+91 8383897274</a>
+              </div>
+            </div>
+
+            <div class="footer-info-item">
+              <div class="footer-info-icon">📧</div>
+              <div class="footer-info-text">
+                <span>Official Email</span>
+                <a href="mailto:idmrstrategies@gmail.com">idmrstrategies@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="footer-info-item">
+              <div class="footer-info-icon">🕒</div>
+              <div class="footer-info-text">
+                <span>Business Hours</span>
+                <strong>Mon – Sat: 9:00 AM – 6:00 PM</strong>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- DIVIDER & BOTTOM BAR -->
+      <div class="idmr-footer-divider"></div>
+
+      <div class="idmr-footer-bottom">
+        <div class="idmr-footer-copy">
+          &copy; 2026 <strong>IDMR Strategies</strong>. All rights reserved. Registered Digital Marketing & Research Agency.
+        </div>
+        <div class="footer-legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Security & Compliance</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- MODAL 1: GET FREE CONSULTATION -->
+  <div class="modal-overlay" id="consult-modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="close-consult-modal" aria-label="Close modal">&times;</button>
+      
+      <div class="modal-header">
+        <div class="modal-badge">GROWTH STRATEGY SESSION</div>
+        <h3 class="modal-title">Get Your Free Consultation</h3>
+        <p class="modal-subtitle">Schedule a 1-on-1 strategy call with our senior digital marketing & research directors.</p>
+      </div>
+
+      <form class="modal-form" id="consult-form">
+        <div class="form-group">
+          <label for="consult-name">Full Name *</label>
+          <input type="text" id="consult-name" required placeholder="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="consult-email">Work Email *</label>
+          <input type="email" id="consult-email" required placeholder="jane@company.com">
+        </div>
+
+        <div class="form-group">
+          <label for="consult-phone">Phone Number</label>
+          <input type="tel" id="consult-phone" placeholder="+1 (555) 000-0000">
+        </div>
+
+        <div class="form-group">
+          <label for="consult-service">Primary Focus Area</label>
+          <select id="consult-service">
+            <option value="seo">SEO & Organic Growth</option>
+            <option value="google-ads">Google & Meta Performance Ads</option>
+            <option value="web-dev">Web Development & AI Automation</option>
+            <option value="market-research">Market Research & Analytics</option>
+            <option value="branding">Branding & Corporate Strategy</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="consult-message">Brief Project Overview</label>
+          <textarea id="consult-message" rows="3" placeholder="Tell us about your current growth targets or marketing challenges..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-full">
+          <span>Submit Request</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: REQUEST PROPOSAL / GET QUOTE -->
+  <div class="modal-overlay" id="quote-modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="close-quote-modal" aria-label="Close modal">&times;</button>
+      
+      <div class="modal-header">
+        <div class="modal-badge">CUSTOM PROPOSAL</div>
+        <h3 class="modal-title">Request a Custom Growth Plan</h3>
+        <p class="modal-subtitle">Receive a tailored digital marketing & research proposal within 24 hours.</p>
+      </div>
+
+      <form class="modal-form" id="quote-form">
+        <div class="form-group">
+          <label for="quote-name">Your Name *</label>
+          <input type="text" id="quote-name" required placeholder="Jane Smith">
+        </div>
+
+        <div class="form-group">
+          <label for="quote-company">Company / Organization *</label>
+          <input type="text" id="quote-company" required placeholder="Acme Global Inc.">
+        </div>
+
+        <div class="form-group">
+          <label for="quote-email">Business Email *</label>
+          <input type="email" id="quote-email" required placeholder="jane@acme.com">
+        </div>
+
+        <div class="form-group">
+          <label for="quote-budget">Monthly Marketing Budget</label>
+          <select id="quote-budget">
+            <option value="5k-10k">$5,000 - $10,000 / mo</option>
+            <option value="10k-25k">$10,000 - $25,000 / mo</option>
+            <option value="25k-50k">$25,000 - $50,000 / mo</option>
+            <option value="50k+">$50,000+ / mo</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-full">
+          <span>Generate Proposal</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
