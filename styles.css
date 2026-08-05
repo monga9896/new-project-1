@@ -1136,13 +1136,13 @@ body {
     display: block !important;
   }
 
-  /* Compact & Centered 3 Analytics Cards (Shifted Upward to Overlap Lower Circle Area) */
+  /* Compact & Balanced 3 Analytics Cards (Overlapping Lower Circle Area) */
   .hero-analytics-cards-row {
     width: 100% !important;
     max-width: 100% !important;
     grid-template-columns: 1fr !important;
-    gap: 0.5rem !important;
-    margin: -85px auto 0 auto !important; /* Overlaps lower part of 245px circle */
+    gap: 0.35rem !important;
+    margin: -70px auto 0 auto !important; /* Overlaps lower circle section cleanly */
     padding: 0 !important;
     position: relative !important;
     z-index: 4 !important;
@@ -1152,40 +1152,44 @@ body {
   .analytics-card {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 0.65rem 0.85rem !important;
-    border-radius: 14px !important;
-    gap: 0.65rem !important;
+    padding: 0.45rem 0.75rem !important; /* Reduced padding & compact height */
+    border-radius: 11px !important;
+    gap: 0.5rem !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
     justify-content: center !important;
     text-align: center !important;
+    min-height: auto !important;
   }
 
   .card-icon-box {
-    width: 34px !important;
-    height: 34px !important;
-    border-radius: 10px !important;
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
   }
 
   .card-icon-box svg {
-    width: 17px !important;
-    height: 17px !important;
+    width: 14px !important;
+    height: 14px !important;
   }
 
   .card-val {
-    font-size: 1.1rem !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
   }
 
   .card-title {
-    font-size: 0.8rem !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
   }
 
   .card-desc {
-    font-size: 0.68rem !important;
+    font-size: 0.62rem !important;
   }
 
   .sub-desc {
-    font-size: 0.62rem !important;
+    font-size: 0.58rem !important;
   }
 
   /* CTA Buttons (Get Free Consultation & Our Services) Placed Directly BEFORE Paragraph */
