@@ -2460,7 +2460,6 @@ body {
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #020b1c;
-  cursor: pointer;
   overflow: hidden;
 }
 
@@ -2469,43 +2468,6 @@ body {
   height: 100%;
   object-fit: contain;
   display: block;
-  transition: transform 0.4s ease;
-}
-
-.slide-image-wrapper:hover .slide-png-img {
-  transform: scale(1.015);
-}
-
-.slide-hover-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(4, 16, 41, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  backdrop-filter: blur(4px);
-}
-
-.slide-image-wrapper:hover .slide-hover-overlay {
-  opacity: 1;
-}
-
-.hover-zoom-text {
-  background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
-  color: #041029;
-  font-size: 0.95rem;
-  font-weight: 800;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  transform: translateY(10px);
-  transition: transform 0.3s ease;
-}
-
-.slide-image-wrapper:hover .hover-zoom-text {
-  transform: translateY(0);
 }
 
 /* FULLSCREEN PRESENTATION LIGHTBOX MODAL */
