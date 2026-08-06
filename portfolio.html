@@ -15,6 +15,15 @@
   <link rel="stylesheet" href="styles.css?v=3.0">
   <!-- Inline Fail-Safe Mobile Menu Toggle -->
   <script>
+    function closeMobileMenu() {
+      var toggleBtn = document.getElementById('mobile-toggle');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (!mobileMenu) return;
+      mobileMenu.classList.remove('active');
+      mobileMenu.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;';
+      if (toggleBtn) toggleBtn.classList.remove('active');
+    }
+
     function toggleMobileMenu(e) {
       if (e) e.stopPropagation();
       var toggleBtn = document.getElementById('mobile-toggle');
@@ -22,9 +31,7 @@
       if (!mobileMenu) return;
       var isShown = mobileMenu.classList.contains('active') || mobileMenu.style.display === 'flex';
       if (isShown) {
-        mobileMenu.classList.remove('active');
-        mobileMenu.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;';
-        if (toggleBtn) toggleBtn.classList.remove('active');
+        closeMobileMenu();
       } else {
         mobileMenu.classList.add('active');
         mobileMenu.style.cssText = 'display: flex !important; flex-direction: column !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; position: fixed !important; top: 72px !important; left: 0 !important; right: 0 !important; z-index: 99998 !important; background: #041029 !important; padding: 2rem 2.5rem !important; border-bottom: 2px solid #d4af37 !important; box-shadow: 0 30px 80px rgba(0,0,0,0.9) !important;';
@@ -79,14 +86,14 @@
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner">
       <nav class="mobile-nav-links">
-        <a href="index.html#home" class="mobile-nav-link">Home</a>
-        <a href="index.html#about" class="mobile-nav-link">About</a>
-        <a href="index.html#services" class="mobile-nav-link">Services</a>
-        <a href="index.html#trusted-by" class="mobile-nav-link">Clients</a>
-        <a href="portfolio.html" class="mobile-nav-link active">Portfolio</a>
+        <a href="index.html#home" class="mobile-nav-link" onclick="closeMobileMenu()">Home</a>
+        <a href="index.html#about" class="mobile-nav-link" onclick="closeMobileMenu()">About</a>
+        <a href="index.html#services" class="mobile-nav-link" onclick="closeMobileMenu()">Services</a>
+        <a href="index.html#trusted-by" class="mobile-nav-link" onclick="closeMobileMenu()">Clients</a>
+        <a href="portfolio.html" class="mobile-nav-link active" onclick="closeMobileMenu()">Portfolio</a>
       </nav>
       <div class="mobile-menu-cta">
-        <button class="btn btn-primary open-consult-modal w-full">
+        <button class="btn btn-primary open-consult-modal w-full" onclick="closeMobileMenu()">
           Get Free Consultation
         </button>
       </div>
