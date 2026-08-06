@@ -4856,12 +4856,12 @@ body {
 /* ==========================================================================
    DEDICATED PORTFOLIO PAGE STYLES
    ========================================================================== */
-.portfolio-page .main-content {
-  padding-top: 5rem;
+body.portfolio-page {
+  padding-top: 130px !important;
 }
 
 .portfolio-hero-section {
-  padding: 5rem 0 3.5rem 0;
+  padding: 1.5rem 0 2rem 0;
   position: relative;
   width: 100%;
 }
