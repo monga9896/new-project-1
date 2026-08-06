@@ -912,12 +912,13 @@ body {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  background: rgba(13, 110, 253, 0.08);
-  border: 1.5px solid rgba(13, 110, 253, 0.25);
+  background: rgba(13, 110, 253, 0.1);
+  border: 1.5px solid var(--color-royal-blue);
   border-radius: 10px;
-  cursor: pointer;
+  cursor: pointer !important;
   padding: 8px 10px;
-  z-index: 1002;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
   transition: all 0.3s ease;
 }
 
@@ -927,6 +928,7 @@ body {
   background: var(--color-navy-blue);
   border-radius: 3px;
   transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 .mobile-toggle.active .bar:nth-child(1) {
@@ -946,25 +948,23 @@ body {
   position: fixed;
   top: 72px;
   left: 0; right: 0;
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1.5px solid rgba(13, 110, 253, 0.15);
-  padding: 1.5rem 2rem;
-  box-shadow: 0 20px 40px rgba(6, 29, 73, 0.2);
-  z-index: 1001;
-  transform: translateY(-15px);
+  background: #ffffff !important;
+  border-bottom: 2px solid var(--color-royal-blue);
+  padding: 1.75rem 2rem;
+  box-shadow: 0 25px 50px rgba(6, 29, 73, 0.25);
+  z-index: 9998 !important;
+  transform: translateY(-10px);
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .mobile-menu.active {
   display: flex !important;
   flex-direction: column;
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .mobile-nav-links {

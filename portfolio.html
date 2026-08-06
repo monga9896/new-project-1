@@ -13,6 +13,23 @@
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="styles.css?v=3.0">
+  <!-- Inline Fail-Safe Mobile Menu Toggle -->
+  <script>
+    function toggleMobileMenu(e) {
+      if (e) e.stopPropagation();
+      var toggleBtn = document.getElementById('mobile-toggle');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (!mobileMenu) return;
+      var isShown = mobileMenu.classList.contains('active');
+      if (isShown) {
+        mobileMenu.classList.remove('active');
+        if (toggleBtn) toggleBtn.classList.remove('active');
+      } else {
+        mobileMenu.classList.add('active');
+        if (toggleBtn) toggleBtn.classList.add('active');
+      }
+    }
+  </script>
 </head>
 <body class="portfolio-page">
   
@@ -47,7 +64,7 @@
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </button>
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+        <button class="mobile-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)" aria-label="Toggle navigation menu">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
