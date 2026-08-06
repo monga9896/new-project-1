@@ -99,8 +99,8 @@
     <section class="portfolio-section" id="portfolio">
       <div class="section-container">
         
-        <!-- CRISP HIGH-RESOLUTION PDF PRESENTATION SHOWCASE (18 ORIGINAL SLIDES) -->
-        <div class="pdf-presentation-showcase fade-up">
+        <!-- CRISP NATIVE PDF DOCUMENT EMBEDDED VIEWER (OFFICIAL 18-PAGE PDF) -->
+        <div class="pdf-presentation-showcase fade-up" id="pdf-viewer-container">
           
           <!-- CONTROL HEADER BAR -->
           <div class="pdf-control-header">
@@ -113,8 +113,8 @@
                 <polyline points="10 9 9 9 8 9"></polyline>
               </svg>
               <div>
-                <h3 class="pdf-header-title">IDMR Enterprise Capability Profile</h3>
-                <p class="pdf-header-subtitle">Official 18-Slide Presentation • Click Any Slide for Fullscreen View</p>
+                <h3 class="pdf-header-title">IDMR Enterprise Capability Profile (Official PDF)</h3>
+                <p class="pdf-header-subtitle">Official 18-Page Presentation • View, Zoom, Scroll & Download</p>
               </div>
             </div>
 
@@ -139,13 +139,18 @@
                 <span>Download PDF</span>
               </a>
 
-              <button type="button" class="pdf-action-btn pdf-btn-gold open-presentation-lightbox" data-slide-index="0" title="Start Fullscreen Presentation Mode">
+              <a href="assets/IDMR_Company_Portfolio.pdf" target="_blank" class="pdf-action-btn pdf-btn-gold" title="Open PDF in Fullscreen Window">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                   <polygon points="5 3 19 12 5 21 5 3"></polygon>
                 </svg>
-                <span>Fullscreen Presentation</span>
-              </button>
+                <span>Open PDF Fullscreen</span>
+              </a>
             </div>
+          </div>
+
+          <!-- NATIVE EMBEDDED REAL PDF DOCUMENT VIEWER -->
+          <div class="native-pdf-embed-wrapper" style="width: 100%; height: 850px; background: #041029; border-radius: 20px; overflow: hidden; border: 2px solid #d4af37; box-shadow: 0 20px 60px rgba(0,0,0,0.6); position: relative; margin-bottom: 2rem;">
+            <iframe id="pdf-frame-element" src="assets/IDMR_Company_Portfolio.pdf#toolbar=1&navpanes=1&scrollbar=1" style="width: 100%; height: 100%; border: none; display: block;" title="IDMR Company Portfolio PDF Document"></iframe>
           </div>
 
           <!-- SLIDE QUICK JUMP NAV BAR (STATIC NON-OVERLAPPING POSITION) -->
