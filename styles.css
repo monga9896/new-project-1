@@ -1070,68 +1070,217 @@ body {
     gap: 0.85rem !important;
   }
 
-  .hero-content {
+  .hero-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-container {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
+    justify-content: center !important;
     text-align: center !important;
     width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 1.25rem !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    gap: 0.85rem !important;
+  }
+
+  .hero-content {
+    display: contents !important;
   }
 
   .hero-kicker {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 0 auto 0.25rem auto !important;
-  }
-
-  .hero-title {
-    font-size: clamp(1.85rem, 6.2vw, 2.4rem) !important;
-    line-height: 1.22 !important;
-    text-align: center !important;
-    margin: 0.35rem auto 0.75rem auto !important;
-    width: 100% !important;
-  }
-
-  .hero-description {
-    text-align: center !important;
-    margin: 0.5rem auto 0.75rem auto !important;
-    font-size: 0.96rem !important;
-    line-height: 1.65 !important;
-    max-width: 95% !important;
-  }
-
-  .hero-buttons {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.75rem !important;
-    margin: 0.75rem auto 0.75rem auto !important;
-  }
-
-  .hero-buttons .btn-lg {
-    width: 100% !important;
-    max-width: 330px !important;
-    margin: 0 auto !important;
-  }
-
-  .hero-trust-container {
-    width: 100% !important;
-    margin: 0.75rem auto 1rem auto !important;
-  }
-
-  .hero-visual-wrapper {
+    order: 1 !important;
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0.5rem auto 0.5rem auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Headline BEFORE Circle on Mobile, Slightly Smaller & Centered */
+  .hero-title {
+    order: 2 !important;
+    font-size: 1.75rem !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+    margin: 0.4rem auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Centered Circle Visual & Canvas Container (Pulled Upward to Eliminate Empty Space below Headline) */
+  .hero-visual-wrapper {
+    order: 3 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: -0.25rem auto 0.5rem auto !important; /* Pulled upward towards headline */
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  #hero-canvas {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+  }
+
+  /* 260px x 260px Square Stage for Slightly Larger Circle & Logo */
+  .hero-logo-standalone-container {
+    position: relative !important;
+    width: 260px !important;
+    height: 260px !important;
+    min-height: 260px !important;
+    max-width: 260px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 245px Circle Backdrop (Slightly Larger Circle Size as requested) */
+  .logo-glow-ring {
+    width: 245px !important;
+    height: 245px !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    z-index: 1 !important;
+  }
+
+  /* Standalone Logo: Visually Centered inside the 245px Circle */
+  .hero-standalone-logo {
+    max-width: 180px !important;
+    max-height: 120px !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(calc(-50% + 14px), -50%) !important;
+    z-index: 2 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  /* Compact & Balanced 3 Analytics Cards (Overlapping Lower Circle Area) */
+  .hero-analytics-cards-row {
+    width: 100% !important;
+    max-width: 100% !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.35rem !important;
+    margin: -70px auto 0 auto !important; /* Overlaps lower circle section cleanly */
+    padding: 0 !important;
+    position: relative !important;
+    z-index: 4 !important;
+    box-sizing: border-box !important;
+  }
+
+  .analytics-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0.45rem 0.75rem !important; /* Reduced padding & compact height */
+    border-radius: 11px !important;
+    gap: 0.5rem !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    justify-content: center !important;
+    text-align: center !important;
+    min-height: auto !important;
+  }
+
+  .card-icon-box {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .card-icon-box svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .card-val {
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+  }
+
+  .card-title {
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+  }
+
+  .card-desc {
+    font-size: 0.62rem !important;
+  }
+
+  .sub-desc {
+    font-size: 0.58rem !important;
+  }
+
+  /* CTA Buttons (Get Free Consultation & Our Services) Placed Directly BEFORE Paragraph */
+  .hero-buttons {
+    order: 4 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.75rem !important;
+    margin: 0.5rem auto 0.5rem auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-buttons .btn-lg {
+    width: 100% !important;
+    max-width: 340px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Description Paragraph ("We help businesses grow through SEO...") Placed AFTER Buttons */
+  .hero-description {
+    order: 5 !important;
+    text-align: center !important;
+    margin: 0.5rem auto 0.75rem auto !important;
+    font-size: 0.95rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-trust-container {
+    order: 6 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0.75rem auto 0 auto !important;
+    box-sizing: border-box !important;
   }
 
   .trust-grid {
