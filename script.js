@@ -813,33 +813,108 @@ function initContactForm() {
 }
 
 /* ==========================================================================
-   13. INTERACTIVE PDF WEB PAGE VIEWER ENGINE
+   13. CRISP HIGH-RESOLUTION PRESENTATION LIGHTBOX & PDF UPLOADER ENGINE
    ========================================================================== */
-function initPdfViewer() {
-  const pdfInput = document.getElementById('pdf-upload-input');
-  const pdfFrame = document.getElementById('pdf-frame-element');
-  const pdfTitle = document.getElementById('pdf-title-text');
-  const pdfDownload = document.getElementById('pdf-download-btn');
-  const pdfFullscreen = document.getElementById('pdf-fullscreen-btn');
+function initPresentationLightbox() {
+  const lightboxModal = document.getElementById('presentation-lightbox');
+  const lbActiveImage = document.getElementById('lb-active-image');
+  const lbCounter = document.getElementById('lb-counter');
+  const lbCloseBtn = document.getElementById('lb-close-btn');
+  const lbPrevBtn = document.getElementById('lb-prev-btn');
+  const lbNextBtn = document.getElementById('lb-next-btn');
 
-  if (!pdfInput || !pdfFrame) return;
+  const totalSlides = 18;
+  let currentSlideIndex = 0;
 
-  pdfInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file && file.type === 'application/pdf') {
-      const fileUrl = URL.createObjectURL(file);
-      pdfFrame.src = fileUrl + '#toolbar=1&navpanes=0&scrollbar=1';
-      if (pdfTitle) pdfTitle.textContent = file.name;
-      if (pdfDownload) {
-        pdfDownload.href = fileUrl;
-        pdfDownload.download = file.name;
+  function updateLightboxSlide(index) {
+    currentSlideIndex = (index + totalSlides) % totalSlides;
+    const slideNumNum = String(currentSlideIndex + 1).padStart(2, '0');
+    if (lbActiveImage) {
+      lbActiveImage.src = `assets/pdf_slides/slide_${slideNumNum}.png`;
+      lbActiveImage.alt = `IDMR Slide ${slideNumNum} Fullscreen View`;
+    }
+    if (lbCounter) {
+      lbCounter.textContent = `Slide ${currentSlideIndex + 1} of ${totalSlides}`;
+    }
+
+    // Update active quick-jump pill
+    document.querySelectorAll('.sq-pill').forEach((pill, idx) => {
+      pill.classList.toggle('active', idx === currentSlideIndex);
+    });
+  }
+
+  // Open Lightbox Event Trigger
+  document.querySelectorAll('.open-presentation-lightbox').forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const slideIndexAttr = trigger.getAttribute('data-slide-index');
+      const slideIndex = slideIndexAttr !== null ? parseInt(slideIndexAttr, 10) : 0;
+      updateLightboxSlide(slideIndex);
+      if (lightboxModal) {
+        lightboxModal.classList.add('active');
+        lightboxModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
       }
-      if (pdfFullscreen) {
-        pdfFullscreen.href = fileUrl;
-      }
-    } else if (file) {
-      alert('Please select a valid PDF file (.pdf)');
+    });
+  });
+
+  // Close Lightbox Event Trigger
+  function closeLightbox() {
+    if (lightboxModal) {
+      lightboxModal.classList.remove('active');
+      lightboxModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (lbCloseBtn) lbCloseBtn.addEventListener('click', closeLightbox);
+  if (lightboxModal) {
+    const overlay = lightboxModal.querySelector('.lightbox-overlay');
+    if (overlay) overlay.addEventListener('click', closeLightbox);
+  }
+
+  // Next & Prev Slide Controls
+  if (lbPrevBtn) {
+    lbPrevBtn.addEventListener('click', () => updateLightboxSlide(currentSlideIndex - 1));
+  }
+  if (lbNextBtn) {
+    lbNextBtn.addEventListener('click', () => updateLightboxSlide(currentSlideIndex + 1));
+  }
+
+  // Keyboard Navigation (Left/Right Arrow Keys & ESC)
+  document.addEventListener('keydown', (e) => {
+    if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') {
+      updateLightboxSlide(currentSlideIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      updateLightboxSlide(currentSlideIndex + 1);
+    } else if (e.key === 'Escape') {
+      closeLightbox();
     }
   });
+
+  // PDF Uploader Live Preview Handling
+  const pdfInput = document.getElementById('pdf-upload-input');
+  if (pdfInput) {
+    pdfInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file && file.type === 'application/pdf') {
+        const fileUrl = URL.createObjectURL(file);
+        const downloadBtn = document.getElementById('pdf-download-btn');
+        if (downloadBtn) {
+          downloadBtn.href = fileUrl;
+          downloadBtn.download = file.name;
+        }
+        alert(`PDF "${file.name}" loaded successfully! Click "Download PDF" to save or view presentation.`);
+      } else if (file) {
+        alert('Please select a valid PDF document (.pdf)');
+      }
+    });
+  }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  initPresentationLightbox();
+});
+
 
