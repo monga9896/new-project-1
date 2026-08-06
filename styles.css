@@ -2176,11 +2176,136 @@ body {
 .portfolio-section {
   position: relative;
   width: 100%;
-  padding: 6rem 0 6.5rem 0;
+  padding: 4rem 0 4.5rem 0;
   background: var(--color-white);
   overflow: hidden;
   z-index: 10;
-  margin-bottom: 5.5rem;
+  margin-bottom: 3.5rem;
+}
+
+/* WEB PAGE FORM PDF VIEWER SECTION */
+.pdf-viewer-section {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.pdf-viewer-card {
+  background: var(--color-white);
+  border: 1.5px solid rgba(13, 110, 253, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(6, 29, 73, 0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.75rem;
+  background: var(--color-navy-blue);
+  color: var(--color-white);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pdf-toolbar-info {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.pdf-toolbar-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.pdf-toolbar-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0;
+}
+
+.pdf-toolbar-subtitle {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 2px 0 0 0;
+}
+
+.pdf-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.pdf-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25 ease;
+  text-decoration: none;
+  border: none;
+}
+
+.pdf-btn-primary {
+  background: var(--color-royal-blue);
+  color: var(--color-white) !important;
+  box-shadow: 0 4px 14px rgba(13, 110, 253, 0.35);
+}
+
+.pdf-btn-primary:hover {
+  background: var(--color-royal-blue-hover);
+  transform: translateY(-2px);
+}
+
+.pdf-btn-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.pdf-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.pdf-frame-wrapper {
+  width: 100%;
+  height: 850px;
+  background: #323639;
+  position: relative;
+}
+
+.pdf-iframe-element {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .pdf-frame-wrapper {
+    height: 520px;
+  }
+  .pdf-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+  .pdf-toolbar-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 /* Category Filter Tabs Bar */

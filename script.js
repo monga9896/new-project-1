@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPortfolioFilter();
   initScrollSpy();
   initContactForm();
+  initPdfViewer();
 });
 
 /* ==========================================================================
@@ -809,6 +810,35 @@ function initContactForm() {
           btn.disabled = false;
         }, 3500);
       }, 1200);
+}
+
+/* ==========================================================================
+   13. INTERACTIVE PDF WEB PAGE VIEWER ENGINE
+   ========================================================================== */
+function initPdfViewer() {
+  const pdfInput = document.getElementById('pdf-upload-input');
+  const pdfFrame = document.getElementById('pdf-frame-element');
+  const pdfTitle = document.getElementById('pdf-title-text');
+  const pdfDownload = document.getElementById('pdf-download-btn');
+  const pdfFullscreen = document.getElementById('pdf-fullscreen-btn');
+
+  if (!pdfInput || !pdfFrame) return;
+
+  pdfInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      const fileUrl = URL.createObjectURL(file);
+      pdfFrame.src = fileUrl + '#toolbar=1&navpanes=0&scrollbar=1';
+      if (pdfTitle) pdfTitle.textContent = file.name;
+      if (pdfDownload) {
+        pdfDownload.href = fileUrl;
+        pdfDownload.download = file.name;
+      }
+      if (pdfFullscreen) {
+        pdfFullscreen.href = fileUrl;
+      }
+    } else if (file) {
+      alert('Please select a valid PDF file (.pdf)');
     }
   });
 }
