@@ -16,6 +16,53 @@
   
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css">
+
+  <script>
+    function closeMobileMenu() {
+      var toggleBtn = document.getElementById('mobile-toggle');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (!mobileMenu) return;
+      mobileMenu.classList.remove('active');
+      mobileMenu.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;';
+      if (toggleBtn) toggleBtn.classList.remove('active');
+    }
+
+    function toggleMobileMenu(e) {
+      if (e) e.stopPropagation();
+      var toggleBtn = document.getElementById('mobile-toggle');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (!mobileMenu) return;
+      var isShown = mobileMenu.classList.contains('active') || mobileMenu.style.display === 'flex';
+      if (isShown) {
+        closeMobileMenu();
+      } else {
+        mobileMenu.classList.add('active');
+        mobileMenu.style.cssText = 'display: flex !important; flex-direction: column !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; position: fixed !important; top: 72px !important; left: 0 !important; right: 0 !important; z-index: 99998 !important; background: #041029 !important; padding: 2rem 2.5rem !important; border-bottom: 2px solid #d4af37 !important; box-shadow: 0 30px 80px rgba(0,0,0,0.9) !important;';
+        if (toggleBtn) toggleBtn.classList.add('active');
+      }
+    }
+
+    function openConsultationModal() {
+      closeMobileMenu();
+      var modal = document.getElementById('consult-modal');
+      if (modal) {
+        modal.classList.add('active');
+        modal.style.display = 'flex';
+      }
+    }
+
+    function openServicesModal() {
+      closeMobileMenu();
+      var modal = document.getElementById('services-modal');
+      if (modal) {
+        modal.classList.add('active');
+        modal.style.display = 'flex';
+      } else {
+        var el = document.getElementById('services');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
 </head>
 <body>
 
@@ -43,14 +90,14 @@
 
       <!-- Nav CTA Button & Mobile Toggle -->
       <div class="nav-actions">
-        <button class="btn btn-nav-cta open-quote-modal" id="nav-quote-btn">
+        <button class="btn btn-nav-cta open-quote-modal" id="nav-quote-btn" onclick="openConsultationModal()">
           <span>Get Quote</span>
           <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </button>
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)" style="z-index: 99999 !important; pointer-events: auto !important; cursor: pointer !important;">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -63,14 +110,14 @@
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner">
       <nav class="mobile-nav-links">
-        <a href="#home" class="mobile-nav-link active">Home</a>
-        <a href="#about" class="mobile-nav-link">About</a>
-        <a href="#services" class="mobile-nav-link" id="mobile-services-link">Services</a>
-        <a href="#trusted-by" class="mobile-nav-link" id="mobile-clients-link">Clients</a>
-        <a href="portfolio.html" class="mobile-nav-link">Portfolio</a>
+        <a href="#home" class="mobile-nav-link active" onclick="closeMobileMenu()">Home</a>
+        <a href="#about" class="mobile-nav-link" onclick="closeMobileMenu()">About</a>
+        <a href="#services" class="mobile-nav-link" id="mobile-services-link" onclick="openServicesModal();">Services</a>
+        <a href="#trusted-by" class="mobile-nav-link" id="mobile-clients-link" onclick="closeMobileMenu()">Clients</a>
+        <a href="portfolio.html" class="mobile-nav-link" onclick="closeMobileMenu()">Portfolio</a>
       </nav>
       <div class="mobile-menu-cta">
-        <button class="btn btn-primary open-consult-modal w-full">
+        <button class="btn btn-primary open-consult-modal w-full" onclick="openConsultationModal();">
           Get Free Consultation
         </button>
       </div>
@@ -102,8 +149,8 @@
         </p>
 
         <!-- CTAs -->
-        <div class="hero-buttons fade-up delay-3">
-          <button class="btn btn-primary btn-lg open-consult-modal" id="hero-primary-btn">
+        <div class="hero-buttons fade-up delay-3" style="position: relative; z-index: 9999; pointer-events: auto;">
+          <button class="btn btn-primary btn-lg open-consult-modal" id="hero-primary-btn" onclick="openConsultationModal()" style="position: relative; z-index: 9999; pointer-events: auto !important; cursor: pointer !important;">
             <span class="btn-text">Get Free Consultation</span>
             <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -111,12 +158,11 @@
             </svg>
           </button>
           
-          <button class="btn btn-secondary btn-lg open-services-modal" id="hero-secondary-btn">
+          <button class="btn btn-secondary btn-lg open-services-modal" id="hero-secondary-btn" onclick="openServicesModal()" style="position: relative; z-index: 9999; pointer-events: auto !important; cursor: pointer !important;">
             <span class="btn-text">Our Services</span>
-            <svg class="btn-icon-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-              <polyline points="2 17 12 22 22 17"></polyline>
-              <polyline points="2 12 12 17 22 12"></polyline>
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </button>
         </div>
