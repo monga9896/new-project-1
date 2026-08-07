@@ -2110,26 +2110,32 @@ body {
   100% { stroke-opacity: 0.95; stroke-width: 3px; }
 }
 
-/* MARQUEE TRACK CONTAINER (FULL EDGE-TO-EDGE FLOW) */
+/* MARQUEE TRACK CONTAINER (PERFECTLY CENTERED - NO SLIDING TO LEFT, NO EDGE BOXES) */
 .marquee-track-container {
   position: relative;
   width: 100%;
   max-width: 100%;
-  margin: 0;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 5;
   padding: 1.5rem 0;
-  mask-image: none;
-  -webkit-mask-image: none;
+  overflow: visible;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
 }
 
 .marquee-track {
   display: flex;
   gap: 2.5rem;
   align-items: center;
-  width: max-content;
-  animation: marqueeContinuous 20s linear infinite;
-  will-change: transform;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: none !important;
+  transform: none !important;
 }
 
 .marquee-track-container:hover .marquee-track {
