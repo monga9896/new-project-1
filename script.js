@@ -1166,7 +1166,18 @@ async function syncCMSData() {
     console.error('LocalStorage sync error:', err);
   }
 
-  // B. Load from Global Cloud CMS Store (Works across all devices & visitors worldwide)
+  // B. Load from static domain file cms_data.json (Guaranteed to load on idmrstrategies.com)
+  try {
+    const staticRes = await fetch('cms_data.json');
+    if (staticRes.ok) {
+      const staticData = await staticRes.json();
+      if (staticData) {
+        applyCMSData(staticData);
+      }
+    }
+  } catch (err) {}
+
+  // C. Load from Global Cloud CMS Store
   try {
     const cloudRes = await fetch('https://api.restful-api.dev/objects/ff8081819f7e10ae019fdbc2c65009d3');
     if (cloudRes.ok) {
@@ -1174,44 +1185,15 @@ async function syncCMSData() {
       if (cloudJson && cloudJson.data) {
         const cd = cloudJson.data;
         const sitePayload = {};
-        if (cd.footer) {
-          sitePayload.footer = cd.footer;
-          localStorage.setItem('idmr_footer_data', JSON.stringify(cd.footer));
-        }
+        if (cd.footer) sitePayload.footer = cd.footer;
         if (cd.homepage) {
           sitePayload.hero = cd.homepage.hero;
           sitePayload.about = cd.homepage.about;
-          localStorage.setItem('idmr_homepage_data', JSON.stringify(cd.homepage));
         }
         applyCMSData(sitePayload);
-        return;
       }
     }
-  } catch (err) {
-    console.error('Cloud CMS fetch error:', err);
-  }
-
-  // C. Fallback to local Python backend API if reachable
-  const endpoints = [
-    'http://localhost:5001/api/public/site-data',
-    'http://127.0.0.1:5001/api/public/site-data',
-    '/api/public/site-data'
-  ];
-
-  for (const url of endpoints) {
-    try {
-      const res = await fetch(url);
-      if (res.ok) {
-        const data = await res.json();
-        if (data.status === 'success' && data.data) {
-          applyCMSData(data.data);
-          break;
-        }
-      }
-    } catch (e) {
-      // Continue fallback
-    }
-  }
+  } catch (err) {}
 }
 
 
