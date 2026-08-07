@@ -587,11 +587,12 @@ body {
   position: relative;
   z-index: 5;
   width: 100%;
-  max-width: 240px;
+  max-width: 320px;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 }
 
 .logo-holographic-shine {
@@ -620,13 +621,14 @@ body {
   z-index: 5;
   width: 100%;
   height: auto;
-  max-width: 240px;
-  max-height: 150px;
+  max-width: 320px;
+  max-height: 180px;
   object-fit: contain;
   filter: drop-shadow(0 12px 30px rgba(6, 29, 73, 0.12));
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+  margin: 0 auto !important;
 }
 
 @keyframes orbitClockwise {
@@ -1231,13 +1233,17 @@ body {
   }
 
   .logo-wrapper-live {
-    position: relative !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
     z-index: 5 !important;
     width: 100% !important;
-    max-width: 200px !important;
+    max-width: 220px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    margin: 0 !important;
   }
 
   /* Standalone Logo: Visually Centered inside the 245px Circle */
@@ -1245,15 +1251,13 @@ body {
     position: relative !important;
     z-index: 5 !important;
     width: 100% !important;
-    max-width: 200px !important;
-    max-height: 120px !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
+    max-width: 220px !important;
+    max-height: 130px !important;
     margin: 0 auto !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    transform: none !important;
   }
 
   /* Sleek & Compact 3-Column Glassmorphism Chips for Mobile */
