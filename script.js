@@ -1148,52 +1148,49 @@ function applyCMSData(data) {
 }
 
 async function syncCMSData() {
-  // A. Load from LocalStorage instantly first
-  try {
-    const localFooter = localStorage.getItem('idmr_footer_data');
-    const localHomepage = localStorage.getItem('idmr_homepage_data');
-    const combinedData = {};
+  let footerData = null;
+  let homepageData = null;
 
-    if (localFooter) combinedData.footer = JSON.parse(localFooter);
-    if (localHomepage) {
-      const hp = JSON.parse(localHomepage);
-      combinedData.hero = hp.hero;
-      combinedData.about = hp.about;
-    }
-
-    applyCMSData(combinedData);
-  } catch (err) {
-    console.error('LocalStorage sync error:', err);
-  }
-
-  // B. Load from static domain file cms_data.json (Guaranteed to load on idmrstrategies.com)
+  // 1. Load baseline static defaults from cms_data.json
   try {
     const staticRes = await fetch('cms_data.json');
     if (staticRes.ok) {
       const staticData = await staticRes.json();
-      if (staticData) {
-        applyCMSData(staticData);
-      }
+      if (staticData?.footer) footerData = staticData.footer;
+      if (staticData?.homepage) homepageData = staticData.homepage;
     }
   } catch (err) {}
 
-  // C. Load from Global Cloud CMS Store
+  // 2. Load from Global Cloud CMS Store (if available)
   try {
     const cloudRes = await fetch('https://api.restful-api.dev/objects/ff8081819f7e10ae019fdbc2c65009d3');
     if (cloudRes.ok) {
       const cloudJson = await cloudRes.json();
-      if (cloudJson && cloudJson.data) {
-        const cd = cloudJson.data;
-        const sitePayload = {};
-        if (cd.footer) sitePayload.footer = cd.footer;
-        if (cd.homepage) {
-          sitePayload.hero = cd.homepage.hero;
-          sitePayload.about = cd.homepage.about;
-        }
-        applyCMSData(sitePayload);
-      }
+      if (cloudJson?.data?.footer) footerData = { ...footerData, ...cloudJson.data.footer };
+      if (cloudJson?.data?.homepage) homepageData = { ...homepageData, ...cloudJson.data.homepage };
     }
   } catch (err) {}
+
+  // 3. LocalStorage OVERRIDES EVERYTHING (Highest Priority for User Edits in Admin Panel)
+  try {
+    const localFooter = localStorage.getItem('idmr_footer_data');
+    if (localFooter) {
+      footerData = { ...footerData, ...JSON.parse(localFooter) };
+    }
+    const localHomepage = localStorage.getItem('idmr_homepage_data');
+    if (localHomepage) {
+      homepageData = { ...homepageData, ...JSON.parse(localHomepage) };
+    }
+  } catch (err) {
+    console.error('LocalStorage merge error:', err);
+  }
+
+  // Apply final merged payload to DOM
+  applyCMSData({
+    footer: footerData,
+    hero: homepageData?.hero,
+    about: homepageData?.about
+  });
 }
 
 
