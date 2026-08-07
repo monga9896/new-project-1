@@ -237,6 +237,62 @@ def init_db():
         footer_links_json TEXT
     )""")
 
+    # Footer Settings (Pre-footer CTA, brand info, social links, contact info, legal text)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS footer_settings (
+        id INTEGER PRIMARY KEY DEFAULT 1,
+        cta_badge TEXT,
+        cta_title TEXT,
+        cta_subtitle TEXT,
+        cta_primary_btn_text TEXT,
+        cta_primary_btn_link TEXT,
+        cta_secondary_btn_text TEXT,
+        cta_secondary_btn_link TEXT,
+        brand_description TEXT,
+        status_pill_text TEXT,
+        facebook_url TEXT,
+        instagram_url TEXT,
+        linkedin_url TEXT,
+        twitter_url TEXT,
+        youtube_url TEXT,
+        work_email TEXT,
+        phone_number TEXT,
+        office_address TEXT,
+        working_hours TEXT,
+        copyright_text TEXT
+    )""")
+
+    cursor.execute("SELECT COUNT(*) FROM footer_settings")
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("""
+        INSERT INTO footer_settings (
+            id, cta_badge, cta_title, cta_subtitle, cta_primary_btn_text, cta_primary_btn_link,
+            cta_secondary_btn_text, cta_secondary_btn_link, brand_description, status_pill_text,
+            facebook_url, instagram_url, linkedin_url, twitter_url, youtube_url,
+            work_email, phone_number, office_address, working_hours, copyright_text
+        ) VALUES (
+            1,
+            '⭐ TOP-RATED DIGITAL & RESEARCH AGENCY',
+            'Ready to Accelerate Your Business Growth?',
+            'Connect with our senior growth strategists and receive a customized, data-backed roadmap for your company.',
+            'Get Free Consultation',
+            '#consult-modal',
+            'View Case Studies',
+            'portfolio.html',
+            'IDMR Strategies is a premier digital marketing & market research agency dedicated to scaling brand revenue through SEO, performance media, AI funnels, and consumer insights.',
+            '● All Systems Operational',
+            'https://facebook.com/idmrstrategies',
+            'https://instagram.com/idmrstrategies',
+            'https://linkedin.com/company/idmrstrategies',
+            'https://twitter.com/idmrstrategies',
+            'https://youtube.com/@idmrstrategies',
+            'idmrstrategies@gmail.com',
+            '+91 8383897274',
+            'Headquarters: IDMR Strategies Tower, Digital Hub, Mohali, Punjab',
+            'Monday–Saturday: 9:00 AM – 6:00 PM',
+            '© 2026 IDMR Strategies. All rights reserved.'
+        )""")
+
     # Audit Logs
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS audit_logs (
@@ -413,6 +469,9 @@ class CMSRequestHandler(BaseHTTPRequestHandler):
             c.execute("SELECT * FROM theme_settings WHERE id = 1")
             theme = dict(c.fetchone() or {})
 
+            c.execute("SELECT * FROM footer_settings WHERE id = 1")
+            footer = dict(c.fetchone() or {})
+
             conn.close()
 
             self.send_json({
@@ -429,9 +488,24 @@ class CMSRequestHandler(BaseHTTPRequestHandler):
                     "blogs": blogs,
                     "contact": contact,
                     "seo": seo,
-                    "theme": theme
+                    "theme": theme,
+                    "footer": footer
                 }
             })
+            return
+
+        # GET FOOTER SETTINGS (/api/cms/footer)
+        if path == "/api/cms/footer":
+            user = self.verify_auth()
+            if not user:
+                self.send_json({"status": "error", "message": "Unauthorized"}, 401)
+                return
+            conn = get_db()
+            c = conn.cursor()
+            c.execute("SELECT * FROM footer_settings WHERE id = 1")
+            footer = dict(c.fetchone() or {})
+            conn.close()
+            self.send_json({"status": "success", "footer": footer})
             return
 
         # 2. AUTH CHECK (/api/auth/me)
@@ -768,6 +842,33 @@ class CMSRequestHandler(BaseHTTPRequestHandler):
             conn.close()
             log_audit(user["email"], "UPDATE_SEO", "Updated global SEO settings")
             self.send_json({"status": "success", "message": "SEO settings saved"})
+            return
+
+        # 10. SAVE FOOTER SETTINGS (/api/cms/footer)
+        if path == "/api/cms/footer":
+            conn = get_db()
+            c = conn.cursor()
+            c.execute("""
+            UPDATE footer_settings SET
+                cta_badge = ?, cta_title = ?, cta_subtitle = ?,
+                cta_primary_btn_text = ?, cta_primary_btn_link = ?,
+                cta_secondary_btn_text = ?, cta_secondary_btn_link = ?,
+                brand_description = ?, status_pill_text = ?,
+                facebook_url = ?, instagram_url = ?, linkedin_url = ?, twitter_url = ?, youtube_url = ?,
+                work_email = ?, phone_number = ?, office_address = ?, working_hours = ?, copyright_text = ?
+            WHERE id = 1
+            """, (
+                body.get("cta_badge", ""), body.get("cta_title", ""), body.get("cta_subtitle", ""),
+                body.get("cta_primary_btn_text", ""), body.get("cta_primary_btn_link", ""),
+                body.get("cta_secondary_btn_text", ""), body.get("cta_secondary_btn_link", ""),
+                body.get("brand_description", ""), body.get("status_pill_text", ""),
+                body.get("facebook_url", ""), body.get("instagram_url", ""), body.get("linkedin_url", ""), body.get("twitter_url", ""), body.get("youtube_url", ""),
+                body.get("work_email", ""), body.get("phone_number", ""), body.get("office_address", ""), body.get("working_hours", ""), body.get("copyright_text", "")
+            ))
+            conn.commit()
+            conn.close()
+            log_audit(user["email"], "UPDATE_FOOTER", "Updated Footer Settings & Pre-Footer Banner")
+            self.send_json({"status": "success", "message": "Footer settings updated successfully!"})
             return
 
         # 10. CHANGE PASSWORD

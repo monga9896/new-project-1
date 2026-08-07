@@ -1036,6 +1036,48 @@ function initPresentationLightbox() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initPresentationLightbox();
+  loadCMSFooterData();
 });
+
+/* Dynamic CMS Footer Sync */
+async function loadCMSFooterData() {
+  try {
+    const res = await fetch('http://127.0.0.1:5001/api/public/site-data');
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.status === 'success' && data.data?.footer) {
+      const f = data.data.footer;
+
+      // Pre-Footer CTA Banner
+      const ctaBadge = document.querySelector('.cta-card-badge');
+      if (ctaBadge && f.cta_badge) ctaBadge.textContent = f.cta_badge;
+
+      const ctaTitle = document.querySelector('.cta-card-title');
+      if (ctaTitle && f.cta_title) ctaTitle.textContent = f.cta_title;
+
+      const ctaSub = document.querySelector('.cta-card-subtitle');
+      if (ctaSub && f.cta_subtitle) ctaSub.textContent = f.cta_subtitle;
+
+      const primaryBtn = document.querySelector('.cta-btn-gold span:first-child');
+      if (primaryBtn && f.cta_primary_btn_text) primaryBtn.textContent = f.cta_primary_btn_text;
+
+      const secondaryBtn = document.querySelector('.cta-btn-glass');
+      if (secondaryBtn && f.cta_secondary_btn_text) secondaryBtn.textContent = f.cta_secondary_btn_text;
+
+      // Brand Bio & Status
+      const brandDesc = document.querySelector('.footer-brand-desc');
+      if (brandDesc && f.brand_description) brandDesc.textContent = f.brand_description;
+
+      const statusPill = document.querySelector('.footer-status-pill span:last-child');
+      if (statusPill && f.status_pill_text) statusPill.textContent = f.status_pill_text;
+
+      // Copyright
+      const copyEl = document.querySelector('.idmr-footer-copy');
+      if (copyEl && f.copyright_text) copyEl.innerHTML = f.copyright_text;
+    }
+  } catch (e) {
+    // Offline fallback
+  }
+}
 
 

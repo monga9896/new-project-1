@@ -183,6 +183,7 @@ function AdminApp() {
             <SidebarButton id="media" icon="🖼️" label="Media Library" activeTab={activeTab} setActiveTab={setActiveTab} />
             <SidebarButton id="seo" icon="🚀" label="SEO & Analytics" activeTab={activeTab} setActiveTab={setActiveTab} />
             <SidebarButton id="theme" icon="🎨" label="Theme & Nav" activeTab={activeTab} setActiveTab={setActiveTab} />
+            <SidebarButton id="footer" icon="🦶" label="Footer Manager" activeTab={activeTab} setActiveTab={setActiveTab} />
             <SidebarButton id="users" icon="🛡️" label="Users & Security" activeTab={activeTab} setActiveTab={setActiveTab} />
           </nav>
         </div>
@@ -350,7 +351,12 @@ function AdminApp() {
           <ThemeEditor siteData={siteData} token={token} showNotify={showNotify} refetch={fetchSiteData} />
         )}
 
-        {/* TAB 13: USERS & SECURITY */}
+        {/* TAB 13: FOOTER MANAGER */}
+        {activeTab === "footer" && (
+          <FooterEditor siteData={siteData} token={token} showNotify={showNotify} refetch={fetchSiteData} />
+        )}
+
+        {/* TAB 14: USERS & SECURITY */}
         {activeTab === "users" && (
           <UsersManager token={token} showNotify={showNotify} />
         )}
@@ -768,6 +774,350 @@ function UsersManager() {
       <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">Admin Users & Audit Security Logs</h3>
       <p className="text-xs text-slate-500">Active Super Admin: admin@idmrstrategies.com (Role: Admin)</p>
     </div>
+  );
+}
+
+// FOOTER EDITOR MODULE
+function FooterEditor({ siteData, token, showNotify, refetch }) {
+  const [footer, setFooter] = useState({
+    cta_badge: siteData?.footer?.cta_badge || "⭐ TOP-RATED DIGITAL & RESEARCH AGENCY",
+    cta_title: siteData?.footer?.cta_title || "Ready to Accelerate Your Business Growth?",
+    cta_subtitle: siteData?.footer?.cta_subtitle || "Connect with our senior growth strategists and receive a customized, data-backed roadmap for your company.",
+    cta_primary_btn_text: siteData?.footer?.cta_primary_btn_text || "Get Free Consultation",
+    cta_primary_btn_link: siteData?.footer?.cta_primary_btn_link || "#consult-modal",
+    cta_secondary_btn_text: siteData?.footer?.cta_secondary_btn_text || "View Case Studies",
+    cta_secondary_btn_link: siteData?.footer?.cta_secondary_btn_link || "portfolio.html",
+    brand_description: siteData?.footer?.brand_description || "IDMR Strategies is a premier digital marketing & market research agency dedicated to scaling brand revenue through SEO, performance media, AI funnels, and consumer insights.",
+    status_pill_text: siteData?.footer?.status_pill_text || "● All Systems Operational",
+    facebook_url: siteData?.footer?.facebook_url || "https://facebook.com/idmrstrategies",
+    instagram_url: siteData?.footer?.instagram_url || "https://instagram.com/idmrstrategies",
+    linkedin_url: siteData?.footer?.linkedin_url || "https://linkedin.com/company/idmrstrategies",
+    twitter_url: siteData?.footer?.twitter_url || "https://twitter.com/idmrstrategies",
+    youtube_url: siteData?.footer?.youtube_url || "https://youtube.com/@idmrstrategies",
+    work_email: siteData?.footer?.work_email || "idmrstrategies@gmail.com",
+    phone_number: siteData?.footer?.phone_number || "+91 8383897274",
+    office_address: siteData?.footer?.office_address || "Headquarters: IDMR Strategies Tower, Digital Hub, Mohali, Punjab",
+    working_hours: siteData?.footer?.working_hours || "Monday–Saturday: 9:00 AM – 6:00 PM",
+    copyright_text: siteData?.footer?.copyright_text || "© 2026 IDMR Strategies. All rights reserved."
+  });
+
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (siteData?.footer) {
+      setFooter((prev) => ({
+        ...prev,
+        ...siteData.footer
+      }));
+    }
+  }, [siteData]);
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/cms/footer`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(footer)
+      });
+      const data = await res.json();
+      if (data.status === "success") {
+        showNotify("Footer settings & pre-footer banner saved successfully!");
+        if (refetch) refetch();
+      } else {
+        showNotify(data.message || "Failed to save footer settings", "error");
+      }
+    } catch (err) {
+      showNotify("Error updating footer settings", "error");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSave} className="space-y-8">
+      {/* SECTION 1: PRE-FOOTER CTA BANNER */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div>
+            <h3 className="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+              <span>🚀</span> Pre-Footer CTA Banner Card
+            </h3>
+            <p className="text-xs text-slate-500">Edit the top pre-footer agency call-to-action banner displayed before footer links</p>
+          </div>
+          <span className="text-xs font-bold text-blue-600 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full">Banner CTA</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Badge Text</label>
+            <input
+              type="text"
+              value={footer.cta_badge || ""}
+              onChange={(e) => setFooter({ ...footer, cta_badge: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="⭐ TOP-RATED DIGITAL & RESEARCH AGENCY"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Main Title</label>
+            <input
+              type="text"
+              value={footer.cta_title || ""}
+              onChange={(e) => setFooter({ ...footer, cta_title: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="Ready to Accelerate Your Business Growth?"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Subtitle / Description</label>
+            <textarea
+              rows={2}
+              value={footer.cta_subtitle || ""}
+              onChange={(e) => setFooter({ ...footer, cta_subtitle: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="Connect with our senior growth strategists..."
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Primary Button Text</label>
+            <input
+              type="text"
+              value={footer.cta_primary_btn_text || ""}
+              onChange={(e) => setFooter({ ...footer, cta_primary_btn_text: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="Get Free Consultation"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Primary Button Link</label>
+            <input
+              type="text"
+              value={footer.cta_primary_btn_link || ""}
+              onChange={(e) => setFooter({ ...footer, cta_primary_btn_link: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="#consult-modal"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Secondary Button Text</label>
+            <input
+              type="text"
+              value={footer.cta_secondary_btn_text || ""}
+              onChange={(e) => setFooter({ ...footer, cta_secondary_btn_text: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="View Case Studies"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Secondary Button Link</label>
+            <input
+              type="text"
+              value={footer.cta_secondary_btn_link || ""}
+              onChange={(e) => setFooter({ ...footer, cta_secondary_btn_link: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="portfolio.html"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* SECTION 2: BRAND INFO & SOCIAL MEDIA LINKS */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div>
+            <h3 className="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+              <span>🏢</span> Brand Bio & Social Networks
+            </h3>
+            <p className="text-xs text-slate-500">Footer column 1 company summary, operational status, and social media handles</p>
+          </div>
+          <span className="text-xs font-bold text-blue-600 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full">Column 1</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="md:col-span-2">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Footer Brand Bio / Description</label>
+            <textarea
+              rows={3}
+              value={footer.brand_description || ""}
+              onChange={(e) => setFooter({ ...footer, brand_description: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="IDMR Strategies is a premier digital marketing agency..."
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Status Indicator Pill Text</label>
+            <input
+              type="text"
+              value={footer.status_pill_text || ""}
+              onChange={(e) => setFooter({ ...footer, status_pill_text: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="● All Systems Operational"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Facebook Page URL</label>
+            <input
+              type="url"
+              value={footer.facebook_url || ""}
+              onChange={(e) => setFooter({ ...footer, facebook_url: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="https://facebook.com/idmrstrategies"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Instagram Profile URL</label>
+            <input
+              type="url"
+              value={footer.instagram_url || ""}
+              onChange={(e) => setFooter({ ...footer, instagram_url: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="https://instagram.com/idmrstrategies"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">LinkedIn Company URL</label>
+            <input
+              type="url"
+              value={footer.linkedin_url || ""}
+              onChange={(e) => setFooter({ ...footer, linkedin_url: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="https://linkedin.com/company/idmrstrategies"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Twitter / X Handle URL</label>
+            <input
+              type="url"
+              value={footer.twitter_url || ""}
+              onChange={(e) => setFooter({ ...footer, twitter_url: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="https://twitter.com/idmrstrategies"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">YouTube Channel URL</label>
+            <input
+              type="url"
+              value={footer.youtube_url || ""}
+              onChange={(e) => setFooter({ ...footer, youtube_url: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="https://youtube.com/@idmrstrategies"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* SECTION 3: CONTACT INFORMATION */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div>
+            <h3 className="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+              <span>📍</span> Official Contact Details
+            </h3>
+            <p className="text-xs text-slate-500">Footer column 4 email, phone, corporate headquarters address, and operating hours</p>
+          </div>
+          <span className="text-xs font-bold text-blue-600 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full">Column 4</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Work Email</label>
+            <input
+              type="email"
+              value={footer.work_email || ""}
+              onChange={(e) => setFooter({ ...footer, work_email: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="idmrstrategies@gmail.com"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Phone Number</label>
+            <input
+              type="text"
+              value={footer.phone_number || ""}
+              onChange={(e) => setFooter({ ...footer, phone_number: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="+91 8383897274"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Office Address</label>
+            <input
+              type="text"
+              value={footer.office_address || ""}
+              onChange={(e) => setFooter({ ...footer, office_address: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="Headquarters: IDMR Strategies Tower, Mohali"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Working Hours</label>
+            <input
+              type="text"
+              value={footer.working_hours || ""}
+              onChange={(e) => setFooter({ ...footer, working_hours: e.target.value })}
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+              placeholder="Monday–Saturday: 9:00 AM – 6:00 PM"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* SECTION 4: COPYRIGHT BAR */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div>
+            <h3 className="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+              <span>⚖️</span> Copyright & Legal Bar
+            </h3>
+            <p className="text-xs text-slate-500">Footer bottom bar copyright statement</p>
+          </div>
+          <span className="text-xs font-bold text-blue-600 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full">Legal Bar</span>
+        </div>
+
+        <div>
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">Copyright Statement Text</label>
+          <input
+            type="text"
+            value={footer.copyright_text || ""}
+            onChange={(e) => setFooter({ ...footer, copyright_text: e.target.value })}
+            className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm"
+            placeholder="© 2026 IDMR Strategies. All rights reserved."
+          />
+        </div>
+      </div>
+
+      {/* ACTION BAR */}
+      <div className="flex items-center justify-end gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+        <button
+          type="submit"
+          disabled={saving}
+          className="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-extrabold rounded-xl shadow-lg shadow-blue-500/25 transition-all transform active:scale-95 flex items-center gap-2"
+        >
+          {saving ? "Saving Changes..." : "💾 Save Footer Settings"}
+        </button>
+      </div>
+    </form>
   );
 }
 
