@@ -420,7 +420,7 @@ class CMSRequestHandler(BaseHTTPRequestHandler):
     # MAIN ROUTER
     def do_GET(self):
         parsed = urlparse(self.path)
-        path = parsed.path
+        path = parsed.path.rstrip('/')
 
         # 1. PUBLIC SITE DATA ENDPOINT
         if path == "/api/public/site-data":
@@ -610,7 +610,8 @@ class CMSRequestHandler(BaseHTTPRequestHandler):
                 "media": "media_files",
                 "users": "users",
                 "why-us": "why_us_cards",
-                "audit-logs": "audit_logs"
+                "audit-logs": "audit_logs",
+                "footer": "footer_settings"
             }
             
             if table in valid_tables:
@@ -626,7 +627,7 @@ class CMSRequestHandler(BaseHTTPRequestHandler):
         self.send_json({"status": "error", "message": "Endpoint not found"}, 404)
 
     def do_POST(self):
-        path = urlparse(self.path).path
+        path = urlparse(self.path).path.rstrip('/')
         body = self.parse_json_body()
 
         # 1. LOGIN ENDPOINT

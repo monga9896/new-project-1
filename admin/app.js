@@ -1,6 +1,6 @@
 const { useState, useEffect } = React;
 
-const API_BASE = "http://127.0.0.1:5001";
+const API_BASE = window.location.port === "5001" ? "" : `${window.location.protocol}//${window.location.hostname}:5001`;
 
 // MAIN ADMIN PANEL APPLICATION
 function AdminApp() {
