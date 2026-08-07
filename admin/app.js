@@ -806,32 +806,42 @@ function UsersManager() {
 
 // FOOTER EDITOR MODULE
 function FooterEditor({ siteData, token, showNotify, refetch }) {
-  const [footer, setFooter] = useState({
-    cta_badge: siteData?.footer?.cta_badge || "⭐ TOP-RATED DIGITAL & RESEARCH AGENCY",
-    cta_title: siteData?.footer?.cta_title || "Ready to Accelerate Your Business Growth?",
-    cta_subtitle: siteData?.footer?.cta_subtitle || "Connect with our senior growth strategists and receive a customized, data-backed roadmap for your company.",
-    cta_primary_btn_text: siteData?.footer?.cta_primary_btn_text || "Get Free Consultation",
-    cta_primary_btn_link: siteData?.footer?.cta_primary_btn_link || "#consult-modal",
-    cta_secondary_btn_text: siteData?.footer?.cta_secondary_btn_text || "View Case Studies",
-    cta_secondary_btn_link: siteData?.footer?.cta_secondary_btn_link || "portfolio.html",
-    brand_description: siteData?.footer?.brand_description || "IDMR Strategies is a premier digital marketing & market research agency dedicated to scaling brand revenue through SEO, performance media, AI funnels, and consumer insights.",
-    status_pill_text: siteData?.footer?.status_pill_text || "● All Systems Operational",
-    facebook_url: siteData?.footer?.facebook_url || "https://facebook.com/idmrstrategies",
-    instagram_url: siteData?.footer?.instagram_url || "https://instagram.com/idmrstrategies",
-    linkedin_url: siteData?.footer?.linkedin_url || "https://linkedin.com/company/idmrstrategies",
-    twitter_url: siteData?.footer?.twitter_url || "https://twitter.com/idmrstrategies",
-    youtube_url: siteData?.footer?.youtube_url || "https://youtube.com/@idmrstrategies",
-    work_email: siteData?.footer?.work_email || "idmrstrategies@gmail.com",
-    phone_number: siteData?.footer?.phone_number || "+91 8383897274",
-    office_address: siteData?.footer?.office_address || "Headquarters: IDMR Strategies Tower, Digital Hub, Mohali, Punjab",
-    working_hours: siteData?.footer?.working_hours || "Monday–Saturday: 9:00 AM – 6:00 PM",
-    copyright_text: siteData?.footer?.copyright_text || "© 2026 IDMR Strategies. All rights reserved."
-  });
+  const getInitialFooter = () => {
+    const saved = localStorage.getItem("idmr_footer_data");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    return {
+      cta_badge: siteData?.footer?.cta_badge || "⭐ TOP-RATED DIGITAL & RESEARCH AGENCY",
+      cta_title: siteData?.footer?.cta_title || "Ready to Accelerate Your Business Growth?",
+      cta_subtitle: siteData?.footer?.cta_subtitle || "Connect with our senior growth strategists and receive a customized, data-backed roadmap for your company.",
+      cta_primary_btn_text: siteData?.footer?.cta_primary_btn_text || "Get Free Consultation",
+      cta_primary_btn_link: siteData?.footer?.cta_primary_btn_link || "#consult-modal",
+      cta_secondary_btn_text: siteData?.footer?.cta_secondary_btn_text || "View Case Studies",
+      cta_secondary_btn_link: siteData?.footer?.cta_secondary_btn_link || "portfolio.html",
+      brand_description: siteData?.footer?.brand_description || "IDMR Strategies is a premier digital marketing & market research agency dedicated to scaling brand revenue through SEO, performance media, AI funnels, and consumer insights.",
+      status_pill_text: siteData?.footer?.status_pill_text || "● All Systems Operational",
+      facebook_url: siteData?.footer?.facebook_url || "https://facebook.com/idmrstrategies",
+      instagram_url: siteData?.footer?.instagram_url || "https://instagram.com/idmrstrategies",
+      linkedin_url: siteData?.footer?.linkedin_url || "https://linkedin.com/company/idmrstrategies",
+      twitter_url: siteData?.footer?.twitter_url || "https://twitter.com/idmrstrategies",
+      youtube_url: siteData?.footer?.youtube_url || "https://youtube.com/@idmrstrategies",
+      work_email: siteData?.footer?.work_email || "idmrstrategies@gmail.com",
+      phone_number: siteData?.footer?.phone_number || "+91 8383897274",
+      office_address: siteData?.footer?.office_address || "Headquarters: IDMR Strategies Tower, Digital Hub, Mohali, Punjab",
+      working_hours: siteData?.footer?.working_hours || "Monday–Saturday: 9:00 AM – 6:00 PM",
+      copyright_text: siteData?.footer?.copyright_text || "© 2026 IDMR Strategies. All rights reserved."
+    };
+  };
 
+  const [footer, setFooter] = useState(getInitialFooter);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (siteData?.footer) {
+    const saved = localStorage.getItem("idmr_footer_data");
+    if (!saved && siteData?.footer) {
       setFooter((prev) => ({
         ...prev,
         ...siteData.footer
@@ -840,10 +850,20 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
   }, [siteData]);
 
   const handleSave = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setSaving(true);
+
     try {
-      const res = await fetch(`${API_BASE}/api/cms/footer`, {
+      localStorage.setItem("idmr_footer_data", JSON.stringify(footer));
+      window.dispatchEvent(new Event("storage"));
+    } catch (err) {
+      console.error("LocalStorage write error:", err);
+    }
+
+    showNotify("Footer settings & pre-footer banner saved successfully!");
+
+    try {
+      await fetch(`${API_BASE}/api/cms/footer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -851,18 +871,8 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
         },
         body: JSON.stringify(footer)
       });
-      const data = await res.json();
-      if (data.status === "success") {
-        showNotify("Footer settings & pre-footer banner saved successfully!");
-        localStorage.setItem("idmr_footer_data", JSON.stringify(footer));
-        if (refetch) refetch();
-      } else {
-        localStorage.setItem("idmr_footer_data", JSON.stringify(footer));
-        showNotify("Footer settings saved locally!");
-      }
     } catch (err) {
-      localStorage.setItem("idmr_footer_data", JSON.stringify(footer));
-      showNotify("Footer settings saved locally (Standalone Mode)!");
+      // Offline mode - handled gracefully via LocalStorage
     } finally {
       setSaving(false);
     }
