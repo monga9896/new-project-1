@@ -6644,3 +6644,37 @@ body.portfolio-page {
     margin-bottom: 0.5rem !important;
   }
 }
+
+/* WE WORKED WITH SECTION SPACING ADJUSTMENT (DOWNWARD FINE-TUNING) */
+.trusted-section {
+  padding: 1.5rem 0 2rem 0 !important;
+  margin-top: 0.5rem !important;
+}
+
+.trusted-marquee-wrapper {
+  padding: 1.5rem 0 1.25rem 0 !important;
+  margin-top: 0.5rem !important;
+}
+
+@media (max-width: 868px) {
+  .trusted-section {
+    padding: 1rem 0 1.5rem 0 !important;
+    margin-top: 0.25rem !important;
+  }
+
+  .trusted-marquee-wrapper {
+    padding: 1rem 0 0.85rem 0 !important;
+    margin-top: 0.25rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .trusted-section {
+    padding: 0.75rem 0 1.25rem 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .trusted-marquee-wrapper {
+    padding: 0.85rem 0 0.65rem 0 !important;
+  }
+}
