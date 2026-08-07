@@ -555,6 +555,92 @@ function initEcosystemCanvas() {
 
   let phase = 0;
 
+  // 3D Rotating DNA Helix Strands
+  function drawDNAHelix(startX, startY, length, angle, time, scale = 1) {
+    ctx.save();
+    ctx.translate(startX, startY);
+    ctx.rotate(angle);
+
+    const numNodes = 22;
+    const spacing = length / numNodes;
+    const amplitude = 28 * scale;
+    const frequency = 0.28;
+
+    for (let i = 0; i < numNodes; i++) {
+      const t = i * frequency + time;
+      const x1 = Math.sin(t) * amplitude;
+      const z1 = Math.cos(t);
+      const x2 = -x1;
+      const y = i * spacing - length / 2;
+
+      // Base pair rungs
+      const alpha = 0.2 + (z1 + 1) * 0.25;
+      ctx.beginPath();
+      ctx.moveTo(x1, y);
+      ctx.lineTo(x2, y);
+      ctx.strokeStyle = z1 > 0 ? `rgba(13, 110, 253, ${alpha * 0.5})` : `rgba(212, 175, 55, ${alpha * 0.4})`;
+      ctx.lineWidth = 1.2 * scale;
+      ctx.stroke();
+
+      // Base pair central node
+      ctx.beginPath();
+      ctx.arc(0, y, 1.8 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = z1 > 0 ? `rgba(0, 210, 255, ${alpha * 0.8})` : `rgba(212, 175, 55, ${alpha * 0.8})`;
+      ctx.fill();
+
+      // Strand 1 Nucleotide Node (Royal Blue / Cyan)
+      const r1 = Math.max(1, (2.8 + z1 * 1.2) * scale);
+      ctx.beginPath();
+      ctx.arc(x1, y, r1, 0, Math.PI * 2);
+      ctx.fillStyle = z1 > 0 ? '#0D6EFD' : '#0052CC';
+      if (z1 > 0.4) {
+        ctx.shadowColor = '#00D2FF';
+        ctx.shadowBlur = 6 * scale;
+      }
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // Strand 2 Nucleotide Node (Gold / Yellow)
+      const r2 = Math.max(1, (2.8 - z1 * 1.2) * scale);
+      ctx.beginPath();
+      ctx.arc(x2, y, r2, 0, Math.PI * 2);
+      ctx.fillStyle = z1 < 0 ? '#D4AF37' : '#FFD700';
+      if (z1 < -0.4) {
+        ctx.shadowColor = '#D4AF37';
+        ctx.shadowBlur = 6 * scale;
+      }
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // Backbone curves
+    ctx.beginPath();
+    for (let i = 0; i < numNodes; i++) {
+      const t = i * frequency + time;
+      const x = Math.sin(t) * amplitude;
+      const y = i * spacing - length / 2;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = 'rgba(13, 110, 253, 0.45)';
+    ctx.lineWidth = 1.8 * scale;
+    ctx.stroke();
+
+    ctx.beginPath();
+    for (let i = 0; i < numNodes; i++) {
+      const t = i * frequency + time;
+      const x = -Math.sin(t) * amplitude;
+      const y = i * spacing - length / 2;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
+    ctx.lineWidth = 1.8 * scale;
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
   function draw() {
     ctx.clearRect(0, 0, width, height);
     phase += 0.012;
@@ -569,6 +655,15 @@ function initEcosystemCanvas() {
     bgGlow.addColorStop(1, 'transparent');
     ctx.fillStyle = bgGlow;
     ctx.fillRect(0, 0, width, height);
+
+    // 1B. Draw Live 3D Dynamic DNA Double-Helix Strands on Left & Right Flanks
+    if (width > 500) {
+      drawDNAHelix(centerX - width * 0.41, centerY, height * 0.9, 0.12, phase * 1.8, 0.85);
+      drawDNAHelix(centerX + width * 0.41, centerY, height * 0.9, -0.12, phase * 1.8 + Math.PI, 0.85);
+    } else {
+      drawDNAHelix(centerX - width * 0.36, centerY, height * 0.85, 0.08, phase * 1.8, 0.65);
+      drawDNAHelix(centerX + width * 0.36, centerY, height * 0.85, -0.08, phase * 1.8 + Math.PI, 0.65);
+    }
 
     // 2. Draw Concentric Orbital Rings (matching reference image)
     const ringRadii = [135, 185, 235];
