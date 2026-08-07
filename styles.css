@@ -2167,6 +2167,13 @@ body {
   transition: filter 0.35s ease;
 }
 
+.logo-pill-inner img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
 .logo-pill-card:hover {
   transform: translateY(-8px) scale(1.08);
   border-color: var(--color-royal-blue);
