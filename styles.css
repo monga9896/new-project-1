@@ -1417,9 +1417,75 @@ body {
     order: 6 !important;
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0.75rem auto 0 auto !important;
-    box-sizing: border-box !important;
+    margin: 0.5rem auto 0 auto !important;
   }
+
+  /* ABOUT SECTION ECOSYSTEM MOBILE OPTIMIZATION */
+  .eco-system-container {
+    height: 460px !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .eco-center-hub {
+    width: 140px !important;
+    height: 140px !important;
+    z-index: 30 !important; /* Ensure central logo hub is ALWAYS on top on mobile */
+  }
+
+  .hub-glass-circle {
+    width: 120px !important;
+    height: 120px !important;
+    padding: 0.6rem !important;
+    box-shadow: 0 10px 30px rgba(6, 29, 73, 0.15) !important;
+  }
+
+  .hub-logo-img {
+    max-height: 42px !important;
+  }
+
+  .eco-node-card {
+    padding: 0.3rem 0.55rem !important;
+    border-radius: 10px !important;
+    gap: 0.35rem !important;
+    z-index: 10 !important;
+    box-shadow: 0 4px 12px rgba(6, 29, 73, 0.1) !important;
+    border: 1px solid rgba(13, 110, 253, 0.18) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  .node-icon-box {
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 6px !important;
+  }
+
+  .node-icon-box svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .soc-badge {
+    width: 13px !important;
+    height: 13px !important;
+    font-size: 0.42rem !important;
+  }
+
+  .node-title {
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* Reposition nodes outward on phone screens so logo is 100% visible */
+  .node-seo { top: 10px !important; left: 50% !important; transform: translateX(-50%) !important; }
+  .node-social { top: 44px !important; right: 4px !important; }
+  .node-research { top: 48% !important; right: 2px !important; transform: translateY(-50%) !important; }
+  .node-branding { bottom: 44px !important; right: 4px !important; }
+  .node-performance { bottom: 10px !important; left: 50% !important; transform: translateX(-50%) !important; }
+  .node-webdev { bottom: 44px !important; left: 4px !important; }
+  .node-ai { top: 48% !important; left: 2px !important; transform: translateY(-50%) !important; }
+  .node-gads { top: 44px !important; left: 4px !important; }
 
   .trust-grid {
     grid-template-columns: repeat(2, 1fr);
