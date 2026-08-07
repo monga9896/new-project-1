@@ -793,15 +793,7 @@ function initTrustedMarquee() {
   const container = document.getElementById('marquee-container');
 
   if (!track || !container) return;
-
-  // Seamless infinite loop: Clone initial set of 5 logo pill cards 3 times
-  const initialCards = Array.from(track.children);
-  for (let i = 0; i < 3; i++) {
-    initialCards.forEach(card => {
-      const clone = card.cloneNode(true);
-      track.appendChild(clone);
-    });
-  }
+}
 
   // Touch Swipe & Drag support
   let isDown = false;

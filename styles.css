@@ -2108,24 +2108,27 @@ body {
   100% { stroke-opacity: 0.95; stroke-width: 3px; }
 }
 
-/* MARQUEE TRACK CONTAINER (NO ARROWS, SEAMLESS INFINITE LOOP) */
+/* MARQUEE TRACK CONTAINER (CENTERED LUXURY SHOWCASE) */
 .marquee-track-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   z-index: 5;
   padding: 1.5rem 0;
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .marquee-track {
   display: flex;
   gap: 2.5rem;
   align-items: center;
-  width: max-content;
-  animation: marqueeContinuous 28s linear infinite;
-  will-change: transform;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .marquee-track-container:hover .marquee-track {
