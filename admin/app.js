@@ -1,6 +1,27 @@
-const { useState, useEffect } = React;
-
 const API_BASE = window.location.port === "5001" ? "" : `${window.location.protocol}//${window.location.hostname}:5001`;
+const CLOUD_CMS_URL = "https://api.restful-api.dev/objects/ff8081819f7e10ae019fdbc2c65009d3";
+
+async function syncToCloudCMS(partialKey, payload) {
+  try {
+    let currentData = {};
+    const getRes = await fetch(CLOUD_CMS_URL);
+    if (getRes.ok) {
+      const getJson = await getRes.json();
+      currentData = getJson.data || {};
+    }
+    currentData[partialKey] = payload;
+    await fetch(CLOUD_CMS_URL, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: "idmr_cms_store",
+        data: currentData
+      })
+    });
+  } catch (err) {
+    console.error("Cloud CMS sync error:", err);
+  }
+}
 
 // MAIN ADMIN PANEL APPLICATION
 function AdminApp() {
@@ -860,7 +881,9 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
       console.error("LocalStorage write error:", err);
     }
 
-    showNotify("Footer settings & pre-footer banner saved successfully!");
+    syncToCloudCMS("footer", footer);
+
+    showNotify("Footer settings & pre-footer banner saved live across all devices!");
 
     try {
       await fetch(`${API_BASE}/api/cms/footer`, {

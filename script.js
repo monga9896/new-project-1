@@ -1166,7 +1166,32 @@ async function syncCMSData() {
     console.error('LocalStorage sync error:', err);
   }
 
-  // B. Load from Backend API if reachable
+  // B. Load from Global Cloud CMS Store (Works across all devices & visitors worldwide)
+  try {
+    const cloudRes = await fetch('https://api.restful-api.dev/objects/ff8081819f7e10ae019fdbc2c65009d3');
+    if (cloudRes.ok) {
+      const cloudJson = await cloudRes.json();
+      if (cloudJson && cloudJson.data) {
+        const cd = cloudJson.data;
+        const sitePayload = {};
+        if (cd.footer) {
+          sitePayload.footer = cd.footer;
+          localStorage.setItem('idmr_footer_data', JSON.stringify(cd.footer));
+        }
+        if (cd.homepage) {
+          sitePayload.hero = cd.homepage.hero;
+          sitePayload.about = cd.homepage.about;
+          localStorage.setItem('idmr_homepage_data', JSON.stringify(cd.homepage));
+        }
+        applyCMSData(sitePayload);
+        return;
+      }
+    }
+  } catch (err) {
+    console.error('Cloud CMS fetch error:', err);
+  }
+
+  // C. Fallback to local Python backend API if reachable
   const endpoints = [
     'http://localhost:5001/api/public/site-data',
     'http://127.0.0.1:5001/api/public/site-data',
@@ -1180,10 +1205,6 @@ async function syncCMSData() {
         const data = await res.json();
         if (data.status === 'success' && data.data) {
           applyCMSData(data.data);
-          if (data.data.footer) localStorage.getItem('idmr_footer_data', JSON.stringify(data.data.footer));
-          if (data.data.hero || data.data.about) {
-            localStorage.setItem('idmr_homepage_data', JSON.stringify({ hero: data.data.hero, about: data.data.about }));
-          }
           break;
         }
       }
