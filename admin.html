@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IDMR Strategies | Enterprise Admin Panel (CMS)</title>
+  
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#0D6EFD',
+              navy: '#061D49',
+              gold: '#D4AF37',
+              bg: '#F8FAFC',
+              darkBg: '#0F172A',
+              cardDark: '#1E293B'
+            }
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React 18 & ReactDOM & Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Admin Panel Custom Styles -->
+  <link rel="stylesheet" href="admin/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans dark:bg-slate-900 dark:text-slate-100 min-h-screen">
+  <div id="admin-root"></div>
+
+  <!-- Admin Panel Application Code -->
+  <script type="text/babel" src="admin/app.js"></script>
+</body>
+</html>

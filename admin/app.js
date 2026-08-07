@@ -126,13 +126,15 @@ function AdminApp() {
     localStorage.removeItem("idmr_admin_token");
   };
 
+  const logoSrc = window.location.pathname.includes("/admin/") ? "../assets/official_idmr_logo.png" : "assets/official_idmr_logo.png";
+
   // IF NOT LOGGED IN -> RENDER LOGIN SCREEN
   if (!token || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 p-4">
         <div className="w-full max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-white/20 p-8 rounded-3xl shadow-2xl">
           <div className="text-center mb-8">
-            <img src="../assets/official_idmr_logo.png" alt="IDMR Logo" className="h-12 mx-auto mb-4 object-contain" />
+            <img src={logoSrc} alt="IDMR Logo" className="h-12 mx-auto mb-4 object-contain" />
             <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">Admin Portal CMS</h2>
             <p className="text-sm text-slate-500 mt-1">Enterprise Content & Lead Management System</p>
           </div>
@@ -191,7 +193,7 @@ function AdminApp() {
       <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-5 flex flex-col justify-between shrink-0">
         <div>
           <div className="flex items-center gap-3 px-2 mb-8">
-            <img src="../assets/official_idmr_logo.png" alt="IDMR Logo" className="h-9 object-contain" />
+            <img src={logoSrc} alt="IDMR Logo" className="h-9 object-contain" />
             <span className="text-xs font-black uppercase tracking-widest text-blue-600 bg-blue-50 dark:bg-blue-950/50 px-2.5 py-1 rounded-md">CMS v2.0</span>
           </div>
 
