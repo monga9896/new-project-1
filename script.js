@@ -1151,9 +1151,9 @@ async function syncCMSData() {
   let footerData = null;
   let homepageData = null;
 
-  // 1. Load baseline static defaults from cms_data.json
+  // 1. Load latest CMS data from cms_data.json with timestamp cache buster
   try {
-    const staticRes = await fetch('cms_data.json');
+    const staticRes = await fetch('cms_data.json?v=' + Date.now());
     if (staticRes.ok) {
       const staticData = await staticRes.json();
       if (staticData?.footer) footerData = staticData.footer;

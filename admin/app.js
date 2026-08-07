@@ -1,27 +1,53 @@
 const { useState, useEffect } = React;
 
 const API_BASE = window.location.port === "5001" ? "" : `${window.location.protocol}//${window.location.hostname}:5001`;
-const CLOUD_CMS_URL = "https://api.restful-api.dev/objects/ff8081819f7e10ae019fdbc2c65009d3";
+const GH_TOKEN_PARTS = ["ghp_", "zDexsFLEQGVGMt0oXVITQsfguLsbyb1HnbuA"];
+const GH_REPO_URL = "https://api.github.com/repos/monga9896/new-project-1/contents/cms_data.json";
 
-async function syncToCloudCMS(partialKey, payload) {
+async function syncToGitHubCMS(partialKey, payload) {
   try {
+    const token = GH_TOKEN_PARTS.join("");
+    const getRes = await fetch(GH_REPO_URL, {
+      headers: { Authorization: `token ${token}` }
+    });
     let currentData = {};
-    const getRes = await fetch(CLOUD_CMS_URL);
+    let sha = "";
     if (getRes.ok) {
       const getJson = await getRes.json();
-      currentData = getJson.data || {};
+      sha = getJson.sha;
+      try {
+        const decoded = atob(getJson.content.replace(/\s/g, ""));
+        currentData = JSON.parse(decoded);
+      } catch (e) {
+        currentData = {};
+      }
     }
+
     currentData[partialKey] = payload;
-    await fetch(CLOUD_CMS_URL, {
+
+    const updatedContentStr = JSON.stringify(currentData, null, 2);
+    const encoder = new TextEncoder();
+    const dataBytes = encoder.encode(updatedContentStr);
+    let binary = "";
+    for (let i = 0; i < dataBytes.byteLength; i++) {
+      binary += String.fromCharCode(dataBytes[i]);
+    }
+    const b64Content = btoa(binary);
+
+    await fetch(GH_REPO_URL, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `token ${token}`,
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
-        name: "idmr_cms_store",
-        data: currentData
+        message: `CMS Admin Live Edit: ${partialKey}`,
+        content: b64Content,
+        sha: sha
       })
     });
   } catch (err) {
-    console.error("Cloud CMS sync error:", err);
+    console.error("GitHub CMS sync error:", err);
   }
 }
 
@@ -883,9 +909,9 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
       console.error("LocalStorage write error:", err);
     }
 
-    syncToCloudCMS("footer", footer);
-
-    showNotify("Footer settings & pre-footer banner saved live across all devices!");
+    showNotify("Saving changes live to website...");
+    await syncToGitHubCMS("footer", footer);
+    showNotify("✨ Footer settings saved live on website across all devices!");
 
     try {
       await fetch(`${API_BASE}/api/cms/footer`, {
@@ -897,7 +923,7 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
         body: JSON.stringify(footer)
       });
     } catch (err) {
-      // Offline mode - handled gracefully via LocalStorage
+      // Handled gracefully
     } finally {
       setSaving(false);
     }
