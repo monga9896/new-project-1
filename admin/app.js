@@ -4,6 +4,19 @@ const API_BASE = window.location.port === "5001" ? "" : `${window.location.proto
 const GH_TOKEN_PARTS = ["ghp_", "zDexsFLEQGVGMt0oXVITQsfguLsbyb1HnbuA"];
 const GH_REPO_URL = "https://api.github.com/repos/monga9896/new-project-1/contents/cms_data.json";
 
+function utf8ToBase64(str) {
+  return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+    return String.fromCharCode("0x" + p1);
+  }));
+}
+
+function base64ToUtf8(b64Str) {
+  const cleanB64 = b64Str.replace(/\s/g, "");
+  return decodeURIComponent(Array.prototype.map.call(atob(cleanB64), function(c) {
+    return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(""));
+}
+
 async function syncToGitHubCMS(partialKey, payload) {
   try {
     const token = GH_TOKEN_PARTS.join("");
@@ -16,9 +29,10 @@ async function syncToGitHubCMS(partialKey, payload) {
       const getJson = await getRes.json();
       sha = getJson.sha;
       try {
-        const decoded = atob(getJson.content.replace(/\s/g, ""));
+        const decoded = base64ToUtf8(getJson.content);
         currentData = JSON.parse(decoded);
       } catch (e) {
+        console.error("Decode error:", e);
         currentData = {};
       }
     }
@@ -26,15 +40,9 @@ async function syncToGitHubCMS(partialKey, payload) {
     currentData[partialKey] = payload;
 
     const updatedContentStr = JSON.stringify(currentData, null, 2);
-    const encoder = new TextEncoder();
-    const dataBytes = encoder.encode(updatedContentStr);
-    let binary = "";
-    for (let i = 0; i < dataBytes.byteLength; i++) {
-      binary += String.fromCharCode(dataBytes[i]);
-    }
-    const b64Content = btoa(binary);
+    const b64Content = utf8ToBase64(updatedContentStr);
 
-    await fetch(GH_REPO_URL, {
+    const putRes = await fetch(GH_REPO_URL, {
       method: "PUT",
       headers: {
         Authorization: `token ${token}`,
@@ -46,8 +54,17 @@ async function syncToGitHubCMS(partialKey, payload) {
         sha: sha
       })
     });
+
+    const putData = await putRes.json();
+    if (putRes.ok) {
+      return true;
+    } else {
+      console.error("GitHub API error:", putData);
+      return false;
+    }
   } catch (err) {
     console.error("GitHub CMS sync error:", err);
+    return false;
   }
 }
 
@@ -905,13 +922,15 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
     try {
       localStorage.setItem("idmr_footer_data", JSON.stringify(footer));
       window.dispatchEvent(new Event("storage"));
-    } catch (err) {
-      console.error("LocalStorage write error:", err);
-    }
+    } catch (err) {}
 
     showNotify("Saving changes live to website...");
-    await syncToGitHubCMS("footer", footer);
-    showNotify("✨ Footer settings saved live on website across all devices!");
+    const success = await syncToGitHubCMS("footer", footer);
+    if (success) {
+      showNotify("✨ Footer settings saved live on website across all devices!");
+    } else {
+      showNotify("Footer settings saved locally in browser!", "warning");
+    }
 
     try {
       await fetch(`${API_BASE}/api/cms/footer`, {
@@ -922,9 +941,7 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
         },
         body: JSON.stringify(footer)
       });
-    } catch (err) {
-      // Handled gracefully
-    } finally {
+    } catch (err) {} finally {
       setSaving(false);
     }
   };
