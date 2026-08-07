@@ -852,9 +852,9 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
       twitter_url: siteData?.footer?.twitter_url || "https://twitter.com/idmrstrategies",
       youtube_url: siteData?.footer?.youtube_url || "https://youtube.com/@idmrstrategies",
       work_email: siteData?.footer?.work_email || "idmrstrategies@gmail.com",
-      phone_number: siteData?.footer?.phone_number || "+91 8383897274",
-      office_address: siteData?.footer?.office_address || "Headquarters: IDMR Strategies Tower, Digital Hub, Mohali, Punjab",
-      working_hours: siteData?.footer?.working_hours || "Monday–Saturday: 9:00 AM – 6:00 PM",
+      phone_number: siteData?.footer?.phone_number || "+91 7678199406",
+      office_address: siteData?.footer?.office_address || "Vardhman mall",
+      working_hours: siteData?.footer?.working_hours || "Monday–Saturday: 9:00 AM – 5:00 PM",
       copyright_text: siteData?.footer?.copyright_text || "© 2026 IDMR Strategies. All rights reserved."
     };
   };
