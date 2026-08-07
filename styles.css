@@ -1343,8 +1343,8 @@ body {
     flex-direction: column !important;
     align-items: stretch !important;
     justify-content: center !important;
-    gap: 0.75rem !important;
-    margin: 0.75rem auto 0.75rem auto !important;
+    gap: 0.65rem !important;
+    margin: -0.5rem auto 0.5rem auto !important; /* Pulled higher up directly below analytics cards */
     padding: 0 0.5rem !important;
     box-sizing: border-box !important;
   }
