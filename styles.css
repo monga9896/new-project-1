@@ -1076,7 +1076,9 @@ body {
     order: 3 !important;
     width: 100% !important;
     max-width: 100% !important;
-    margin: -0.25rem auto 0.5rem auto !important; /* Pulled upward towards headline */
+    min-height: auto !important;
+    height: auto !important;
+    margin: -1.5rem auto 0 auto !important; /* Pulled upward directly below headline */
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
