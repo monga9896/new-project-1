@@ -2077,10 +2077,12 @@ body {
 .trusted-marquee-wrapper {
   position: relative;
   width: 100%;
+  max-width: 960px;
+  margin: 1rem auto 0 auto;
   padding: 4.5rem 0 3.5rem 0;
-  margin-top: 1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .trusted-wave-bg {
@@ -2108,15 +2110,17 @@ body {
   100% { stroke-opacity: 0.95; stroke-width: 3px; }
 }
 
-/* MARQUEE TRACK CONTAINER (CONTINUOUS MOVING ANIMATION) */
+/* MARQUEE TRACK CONTAINER (CONTINUOUS MOVING ANIMATION - CENTERED CONTAINER) */
 .marquee-track-container {
   position: relative;
   width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
   overflow: hidden;
   z-index: 5;
   padding: 1.5rem 0;
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
 .marquee-track {
