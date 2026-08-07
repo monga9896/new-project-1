@@ -1,3 +1,5 @@
+const { useState, useEffect } = React;
+
 const API_BASE = window.location.port === "5001" ? "" : `${window.location.protocol}//${window.location.hostname}:5001`;
 const CLOUD_CMS_URL = "https://api.restful-api.dev/objects/ff8081819f7e10ae019fdbc2c65009d3";
 
