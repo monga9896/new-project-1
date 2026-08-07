@@ -492,7 +492,7 @@ body {
   opacity: 0.7; /* Reduced background network opacity behind logo as requested */
 }
 
-/* GLOWING BLUE RADIAL HALO RING (LOCKED TO EXACT DEAD-CENTER BEHIND LOGO) */
+/* GLOWING BLUE & GOLD RADIAL HALO STAGE WITH DYNAMIC ORBITS */
 .logo-glow-ring {
   position: absolute;
   top: 50% !important;
@@ -501,8 +501,8 @@ body {
   width: 440px;
   height: 440px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(13, 110, 253, 0.18) 0%, rgba(13, 110, 253, 0.04) 55%, transparent 75%);
-  box-shadow: inset 0 0 50px rgba(13, 110, 253, 0.12);
+  background: radial-gradient(circle, rgba(13, 110, 253, 0.22) 0%, rgba(212, 175, 55, 0.08) 45%, rgba(13, 110, 253, 0.03) 70%, transparent 85%);
+  box-shadow: 0 0 60px rgba(13, 110, 253, 0.25), inset 0 0 45px rgba(212, 175, 55, 0.12);
   z-index: 1;
   pointer-events: none;
   animation: ringPulseAnim 4s ease-in-out infinite;
@@ -513,8 +513,57 @@ body {
   position: absolute;
   inset: 25px;
   border-radius: 50%;
-  border: 1.5px solid rgba(13, 110, 253, 0.15);
-  box-shadow: 0 0 30px rgba(13, 110, 253, 0.1);
+  border: 1.5px solid rgba(13, 110, 253, 0.18);
+  box-shadow: 0 0 30px rgba(13, 110, 253, 0.15);
+}
+
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.orbit-ring.outer-orbit {
+  border: 1.5px dashed rgba(13, 110, 253, 0.4);
+  animation: orbitClockwise 22s linear infinite;
+  box-shadow: 0 0 25px rgba(13, 110, 253, 0.18);
+}
+
+.orbit-ring.inner-orbit {
+  inset: 24px;
+  border: 1.5px solid rgba(212, 175, 55, 0.35);
+  animation: orbitCounterClockwise 16s linear infinite;
+}
+
+.orbit-particle {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+  pointer-events: none;
+}
+
+.orbit-particle.p1 {
+  top: 15px;
+  left: 50%;
+  background: #0d6efd;
+  color: #0d6efd;
+}
+
+.orbit-particle.p2 {
+  bottom: 25px;
+  right: 20%;
+  background: #d4af37;
+  color: #d4af37;
+}
+
+.orbit-particle.p3 {
+  top: 45%;
+  left: 10px;
+  background: #38bdf8;
+  color: #38bdf8;
 }
 
 /* PRIMARY FOCAL POINT: STANDALONE UN-BOXED OFFICIAL LOGO */
@@ -533,6 +582,38 @@ body {
   animation: logoGentleFloat 5s ease-in-out infinite;
 }
 
+/* LIVE LOGO WRAPPER & METALLIC GOLD SHINE SWEEP */
+.logo-wrapper-live {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.logo-holographic-shine {
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 70%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 223, 120, 0.7) 50%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  animation: shineSweep 4s ease-in-out infinite;
+  mix-blend-mode: overlay;
+  z-index: 3;
+}
+
 .hero-standalone-logo {
   position: relative;
   z-index: 2;
@@ -541,6 +622,23 @@ body {
   max-height: 200px;
   object-fit: contain;
   filter: drop-shadow(0 12px 30px rgba(6, 29, 73, 0.12));
+}
+
+@keyframes orbitClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitCounterClockwise {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes shineSweep {
+  0% { left: -80%; opacity: 0; }
+  20% { opacity: 1; }
+  50% { left: 150%; opacity: 1; }
+  100% { left: 150%; opacity: 0; }
 }
 
 /* REPOSITIONED ANALYTICS CARDS ROW (POSITIONED BELOW LOGO) */
