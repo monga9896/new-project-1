@@ -1036,47 +1036,160 @@ function initPresentationLightbox() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initPresentationLightbox();
-  loadCMSFooterData();
+  syncCMSData();
 });
 
-/* Dynamic CMS Footer Sync */
-async function loadCMSFooterData() {
-  try {
-    const res = await fetch('http://127.0.0.1:5001/api/public/site-data');
-    if (!res.ok) return;
-    const data = await res.json();
-    if (data.status === 'success' && data.data?.footer) {
-      const f = data.data.footer;
+// Listen for live storage updates across browser tabs
+window.addEventListener('storage', () => {
+  syncCMSData();
+});
 
-      // Pre-Footer CTA Banner
-      const ctaBadge = document.querySelector('.cta-card-badge');
-      if (ctaBadge && f.cta_badge) ctaBadge.textContent = f.cta_badge;
+/* Dynamic CMS & LocalStorage Live Sync Engine */
+function applyCMSData(data) {
+  if (!data) return;
 
-      const ctaTitle = document.querySelector('.cta-card-title');
-      if (ctaTitle && f.cta_title) ctaTitle.textContent = f.cta_title;
+  // 1. FOOTER SETTINGS
+  const f = data.footer;
+  if (f) {
+    const ctaBadge = document.querySelector('.cta-card-badge');
+    if (ctaBadge && f.cta_badge) ctaBadge.textContent = f.cta_badge;
 
-      const ctaSub = document.querySelector('.cta-card-subtitle');
-      if (ctaSub && f.cta_subtitle) ctaSub.textContent = f.cta_subtitle;
+    const ctaTitle = document.querySelector('.cta-card-title');
+    if (ctaTitle && f.cta_title) ctaTitle.textContent = f.cta_title;
 
-      const primaryBtn = document.querySelector('.cta-btn-gold span:first-child');
-      if (primaryBtn && f.cta_primary_btn_text) primaryBtn.textContent = f.cta_primary_btn_text;
+    const ctaSub = document.querySelector('.cta-card-subtitle');
+    if (ctaSub && f.cta_subtitle) ctaSub.textContent = f.cta_subtitle;
 
-      const secondaryBtn = document.querySelector('.cta-btn-glass');
-      if (secondaryBtn && f.cta_secondary_btn_text) secondaryBtn.textContent = f.cta_secondary_btn_text;
-
-      // Brand Bio & Status
-      const brandDesc = document.querySelector('.footer-brand-desc');
-      if (brandDesc && f.brand_description) brandDesc.textContent = f.brand_description;
-
-      const statusPill = document.querySelector('.footer-status-pill span:last-child');
-      if (statusPill && f.status_pill_text) statusPill.textContent = f.status_pill_text;
-
-      // Copyright
-      const copyEl = document.querySelector('.idmr-footer-copy');
-      if (copyEl && f.copyright_text) copyEl.innerHTML = f.copyright_text;
+    const primaryBtn = document.querySelector('.cta-btn-gold');
+    if (primaryBtn) {
+      const textSpan = primaryBtn.querySelector('span:first-child');
+      if (textSpan && f.cta_primary_btn_text) textSpan.textContent = f.cta_primary_btn_text;
+      if (f.cta_primary_btn_link) primaryBtn.href = f.cta_primary_btn_link;
     }
-  } catch (e) {
-    // Offline fallback
+
+    const secondaryBtn = document.querySelector('.cta-btn-glass');
+    if (secondaryBtn) {
+      if (f.cta_secondary_btn_text) secondaryBtn.textContent = f.cta_secondary_btn_text;
+      if (f.cta_secondary_btn_link) secondaryBtn.href = f.cta_secondary_btn_link;
+    }
+
+    const brandDesc = document.querySelector('.footer-brand-desc');
+    if (brandDesc && f.brand_description) brandDesc.textContent = f.brand_description;
+
+    const statusPill = document.querySelector('.footer-status-pill span:last-child');
+    if (statusPill && f.status_pill_text) statusPill.textContent = f.status_pill_text;
+
+    // Contact Details
+    const emailEl = document.querySelector('.footer-info-item a[href^="mailto:"]');
+    if (emailEl && f.work_email) {
+      emailEl.href = 'mailto:' + f.work_email;
+      emailEl.textContent = f.work_email;
+    }
+
+    const phoneEl = document.querySelector('.footer-info-item a[href^="tel:"]');
+    if (phoneEl && f.phone_number) {
+      phoneEl.href = 'tel:' + f.phone_number.replace(/\s+/g, '');
+      phoneEl.textContent = f.phone_number;
+    }
+
+    const addressEl = document.querySelector('.footer-info-item:nth-child(1) strong');
+    if (addressEl && f.office_address) addressEl.textContent = f.office_address;
+
+    const hoursEl = document.querySelector('.footer-info-item:nth-child(4) strong');
+    if (hoursEl && f.working_hours) hoursEl.textContent = f.working_hours;
+
+    // Social Links
+    if (f.facebook_url) {
+      const fb = document.querySelector('.footer-social-btn[aria-label="Facebook"]');
+      if (fb) fb.href = f.facebook_url;
+    }
+    if (f.instagram_url) {
+      const ig = document.querySelector('.footer-social-btn[aria-label="Instagram"]');
+      if (ig) ig.href = f.instagram_url;
+    }
+    if (f.linkedin_url) {
+      const li = document.querySelector('.footer-social-btn[aria-label="LinkedIn"]');
+      if (li) li.href = f.linkedin_url;
+    }
+    if (f.twitter_url) {
+      const tw = document.querySelector('.footer-social-btn[aria-label="X (Twitter)"]');
+      if (tw) tw.href = f.twitter_url;
+    }
+    if (f.youtube_url) {
+      const yt = document.querySelector('.footer-social-btn[aria-label="YouTube"]');
+      if (yt) yt.href = f.youtube_url;
+    }
+
+    const copyEl = document.querySelector('.idmr-footer-copy');
+    if (copyEl && f.copyright_text) copyEl.innerHTML = f.copyright_text;
+  }
+
+  // 2. HOMEPAGE HERO & ABOUT SETTINGS
+  const h = data.hero;
+  if (h) {
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle && h.headline) heroTitle.innerHTML = h.headline;
+
+    const heroSub = document.querySelector('.hero-subtitle');
+    if (heroSub && h.subheading) heroSub.textContent = h.subheading;
+
+    const heroBadge = document.querySelector('.hero-badge span:last-child');
+    if (heroBadge && h.badge_text) heroBadge.textContent = h.badge_text;
+  }
+
+  const a = data.about;
+  if (a) {
+    const aboutTitle = document.querySelector('.about-section .section-headline');
+    if (aboutTitle && a.heading) aboutTitle.innerHTML = a.heading;
+
+    const aboutDesc = document.querySelector('.about-section .section-subhead');
+    if (aboutDesc && a.description) aboutDesc.textContent = a.description;
+  }
+}
+
+async function syncCMSData() {
+  // A. Load from LocalStorage instantly first
+  try {
+    const localFooter = localStorage.getItem('idmr_footer_data');
+    const localHomepage = localStorage.getItem('idmr_homepage_data');
+    const combinedData = {};
+
+    if (localFooter) combinedData.footer = JSON.parse(localFooter);
+    if (localHomepage) {
+      const hp = JSON.parse(localHomepage);
+      combinedData.hero = hp.hero;
+      combinedData.about = hp.about;
+    }
+
+    applyCMSData(combinedData);
+  } catch (err) {
+    console.error('LocalStorage sync error:', err);
+  }
+
+  // B. Load from Backend API if reachable
+  const endpoints = [
+    'http://localhost:5001/api/public/site-data',
+    'http://127.0.0.1:5001/api/public/site-data',
+    '/api/public/site-data'
+  ];
+
+  for (const url of endpoints) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.status === 'success' && data.data) {
+          applyCMSData(data.data);
+          if (data.data.footer) localStorage.getItem('idmr_footer_data', JSON.stringify(data.data.footer));
+          if (data.data.hero || data.data.about) {
+            localStorage.setItem('idmr_homepage_data', JSON.stringify({ hero: data.data.hero, about: data.data.about }));
+          }
+          break;
+        }
+      }
+    } catch (e) {
+      // Continue fallback
+    }
   }
 }
 
