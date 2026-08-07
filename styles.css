@@ -1138,13 +1138,14 @@ body {
     display: block !important;
   }
 
-  /* Compact & Balanced 3 Analytics Cards (Overlapping Lower Circle Area) */
+  /* Sleek & Compact 3-Column Glassmorphism Chips for Mobile */
   .hero-analytics-cards-row {
     width: 100% !important;
     max-width: 100% !important;
-    grid-template-columns: 1fr !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 0.35rem !important;
-    margin: -70px auto 0 auto !important; /* Overlaps lower circle section cleanly */
+    margin: -40px auto 1rem auto !important;
     padding: 0 !important;
     position: relative !important;
     z-index: 4 !important;
@@ -1154,44 +1155,60 @@ body {
   .analytics-card {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 0.45rem 0.75rem !important; /* Reduced padding & compact height */
-    border-radius: 11px !important;
-    gap: 0.5rem !important;
-    margin: 0 auto !important;
-    box-sizing: border-box !important;
+    padding: 0.45rem 0.25rem !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 14px rgba(6, 29, 73, 0.05) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
+    gap: 0.2rem !important;
     min-height: auto !important;
   }
 
   .card-icon-box {
-    width: 28px !important;
-    height: 28px !important;
-    border-radius: 8px !important;
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 6px !important;
     flex-shrink: 0 !important;
+    margin: 0 auto !important;
   }
 
   .card-icon-box svg {
-    width: 14px !important;
-    height: 14px !important;
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  .card-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
   }
 
   .card-val {
-    font-size: 0.95rem !important;
+    font-size: 0.85rem !important;
     font-weight: 800 !important;
-  }
-
-  .card-title {
-    font-size: 0.72rem !important;
-    font-weight: 700 !important;
+    line-height: 1.1 !important;
+    color: var(--color-navy-blue) !important;
+    margin-bottom: 1px !important;
   }
 
   .card-desc {
-    font-size: 0.62rem !important;
+    font-size: 0.6rem !important;
+    line-height: 1.15 !important;
+    color: #334155 !important;
+    font-weight: 600 !important;
   }
 
-  .sub-desc {
-    font-size: 0.58rem !important;
+  .card-desc .sub-desc {
+    display: none !important;
   }
 
   /* CTA Buttons (Get Free Consultation & Our Services) Placed Directly BEFORE Paragraph */
