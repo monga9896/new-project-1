@@ -14,34 +14,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=3.0">
-  <!-- Inline Fail-Safe Mobile Menu Toggle -->
-  <script>
-    function closeMobileMenu() {
-      var toggleBtn = document.getElementById('mobile-toggle');
-      var mobileMenu = document.getElementById('mobile-menu');
-      if (!mobileMenu) return;
-      mobileMenu.classList.remove('active');
-      mobileMenu.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;';
-      if (toggleBtn) toggleBtn.classList.remove('active');
-    }
-
-    function toggleMobileMenu(e) {
-      if (e) e.stopPropagation();
-      var toggleBtn = document.getElementById('mobile-toggle');
-      var mobileMenu = document.getElementById('mobile-menu');
-      if (!mobileMenu) return;
-      var isShown = mobileMenu.classList.contains('active') || mobileMenu.style.display === 'flex';
-      if (isShown) {
-        closeMobileMenu();
-      } else {
-        mobileMenu.classList.add('active');
-        mobileMenu.style.cssText = 'display: flex !important; flex-direction: column !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; position: fixed !important; top: 72px !important; left: 0 !important; right: 0 !important; z-index: 99998 !important; background: #041029 !important; padding: 2rem 2.5rem !important; border-bottom: 2px solid #d4af37 !important; box-shadow: 0 30px 80px rgba(0,0,0,0.9) !important;';
-        if (toggleBtn) toggleBtn.classList.add('active');
-      }
-    }
-  </script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -76,7 +50,7 @@
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </button>
-        <button class="mobile-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)" aria-label="Toggle navigation menu">
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -89,14 +63,14 @@
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-inner">
       <nav class="mobile-nav-links">
-        <a href="#home" class="mobile-nav-link active" onclick="closeMobileMenu()">Home</a>
-        <a href="#about" class="mobile-nav-link" onclick="closeMobileMenu()">About</a>
-        <a href="#services" class="mobile-nav-link" id="mobile-services-link" onclick="closeMobileMenu()">Services</a>
-        <a href="#trusted-by" class="mobile-nav-link" id="mobile-clients-link" onclick="closeMobileMenu()">Clients</a>
-        <a href="portfolio.html" class="mobile-nav-link" onclick="closeMobileMenu()">Portfolio</a>
+        <a href="#home" class="mobile-nav-link active">Home</a>
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#services" class="mobile-nav-link" id="mobile-services-link">Services</a>
+        <a href="#trusted-by" class="mobile-nav-link" id="mobile-clients-link">Clients</a>
+        <a href="portfolio.html" class="mobile-nav-link">Portfolio</a>
       </nav>
       <div class="mobile-menu-cta">
-        <button class="btn btn-primary open-consult-modal w-full" onclick="closeMobileMenu()">
+        <button class="btn btn-primary open-consult-modal w-full">
           Get Free Consultation
         </button>
       </div>
@@ -210,14 +184,11 @@
         <!-- Interactive Animated Canvas -->
         <canvas id="hero-canvas"></canvas>
 
-        <!-- Primary Focal Point: Animated IDMR Logo Video & Centered Glow Ring -->
+        <!-- Primary Focal Point: Un-boxed Prominent IDMR Official Logo & Centered Glow Ring -->
         <div class="hero-logo-standalone-container">
           <!-- Glowing Blue Radial Ring Backdrop (Centered behind logo) -->
           <div class="logo-glow-ring" aria-hidden="true"></div>
-          <video class="hero-animated-logo-video" autoplay loop muted playsinline poster="assets/official_idmr_logo_transparent.png" aria-label="IDMR Strategies Animated Logo Video">
-            <source src="assets/idmr_animated_logo.mp4" type="video/mp4">
-            <img src="assets/official_idmr_logo_transparent.png" alt="IDMR Strategies Official Logo" class="hero-standalone-logo">
-          </video>
+          <img src="assets/official_idmr_logo_transparent.png" alt="IDMR Strategies Official Logo" class="hero-standalone-logo">
         </div>
 
         <!-- Analytics Cards Row Positioned Below Logo -->
