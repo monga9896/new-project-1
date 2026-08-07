@@ -1145,11 +1145,40 @@ function applyCMSData(data) {
     const aboutDesc = document.querySelector('.about-section .section-subhead');
     if (aboutDesc && a.description) aboutDesc.textContent = a.description;
   }
+
+  // 3. CORPORATE STATS CARDS
+  const s = data.stats;
+  if (Array.isArray(s) && s.length >= 4) {
+    const statCards = document.querySelectorAll('.corporate-stats-grid .corp-stat-card');
+    statCards.forEach((card, idx) => {
+      const item = s[idx];
+      if (!item) return;
+
+      const counterEl = card.querySelector('.corp-stat-value');
+      if (counterEl) {
+        counterEl.setAttribute('data-target', item.value);
+        counterEl.textContent = item.value;
+      }
+
+      const prefixEl = card.querySelector('.corp-stat-prefix');
+      if (prefixEl) prefixEl.textContent = item.prefix || '';
+
+      const suffixEl = card.querySelector('.corp-stat-suffix');
+      if (suffixEl) suffixEl.textContent = item.suffix || '';
+
+      const titleEl = card.querySelector('.corp-stat-title');
+      if (titleEl && item.title) titleEl.textContent = item.title;
+
+      const subEl = card.querySelector('.corp-stat-sub');
+      if (subEl && item.sub) subEl.textContent = item.sub;
+    });
+  }
 }
 
 async function syncCMSData() {
   let footerData = null;
   let homepageData = null;
+  let statsData = null;
 
   // 1. Load latest CMS data from cms_data.json with timestamp cache buster
   try {
@@ -1158,20 +1187,11 @@ async function syncCMSData() {
       const staticData = await staticRes.json();
       if (staticData?.footer) footerData = staticData.footer;
       if (staticData?.homepage) homepageData = staticData.homepage;
+      if (staticData?.stats) statsData = staticData.stats;
     }
   } catch (err) {}
 
-  // 2. Load from Global Cloud CMS Store (if available)
-  try {
-    const cloudRes = await fetch('https://api.restful-api.dev/objects/ff8081819f7e10ae019fdbc2c65009d3');
-    if (cloudRes.ok) {
-      const cloudJson = await cloudRes.json();
-      if (cloudJson?.data?.footer) footerData = { ...footerData, ...cloudJson.data.footer };
-      if (cloudJson?.data?.homepage) homepageData = { ...homepageData, ...cloudJson.data.homepage };
-    }
-  } catch (err) {}
-
-  // 3. LocalStorage OVERRIDES EVERYTHING (Highest Priority for User Edits in Admin Panel)
+  // 2. LocalStorage OVERRIDES EVERYTHING (Highest Priority for User Edits in Admin Panel)
   try {
     const localFooter = localStorage.getItem('idmr_footer_data');
     if (localFooter) {
@@ -1181,6 +1201,10 @@ async function syncCMSData() {
     if (localHomepage) {
       homepageData = { ...homepageData, ...JSON.parse(localHomepage) };
     }
+    const localStats = localStorage.getItem('idmr_stats_data');
+    if (localStats) {
+      statsData = JSON.parse(localStats);
+    }
   } catch (err) {
     console.error('LocalStorage merge error:', err);
   }
@@ -1189,7 +1213,8 @@ async function syncCMSData() {
   applyCMSData({
     footer: footerData,
     hero: homepageData?.hero,
-    about: homepageData?.about
+    about: homepageData?.about,
+    stats: statsData
   });
 }
 

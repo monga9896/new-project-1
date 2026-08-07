@@ -12,12 +12,42 @@
     "facebook_url": "https://facebook.com/idmrstrategies",
     "instagram_url": "https://instagram.com/idmrstrategies",
     "linkedin_url": "https://linkedin.com/company/idmrstrategies",
-    "twitter_url": "",
+    "twitter_url": "https://twitter.com/idmrstrategies",
     "youtube_url": "https://youtube.com/@idmrstrategies",
     "work_email": "idmrstrategies@gmail.com",
     "phone_number": "+91 7678199406",
     "office_address": "Vardhman fortune mall, Delhi 110033",
     "working_hours": "Monday–Saturday: 9:00 AM – 5:00 PM",
-    "copyright_text": "© 2026 IDMR Strategies. All rights "
-  }
+    "copyright_text": "© 2026 IDMR Strategies. All rights reserved."
+  },
+  "stats": [
+    {
+      "value": "10",
+      "suffix": "+",
+      "prefix": "",
+      "title": "Years of Industry Excellence",
+      "sub": "Proven track record since founding"
+    },
+    {
+      "value": "50",
+      "suffix": "+",
+      "prefix": "",
+      "title": "Growth Projects Delivered",
+      "sub": "Across 20+ specialized industries"
+    },
+    {
+      "value": "99.4",
+      "suffix": "%",
+      "prefix": "",
+      "title": "Long-Term Client Retention",
+      "sub": "Trusted ongoing partnerships"
+    },
+    {
+      "value": "5",
+      "suffix": "M+",
+      "prefix": "$",
+      "title": "Verified Client ROI Generated",
+      "sub": "Data-driven performance outcomes"
+    }
+  ]
 }

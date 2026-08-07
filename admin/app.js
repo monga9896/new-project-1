@@ -277,6 +277,7 @@ function AdminApp() {
             <SidebarButton id="seo" icon="🚀" label="SEO & Analytics" activeTab={activeTab} setActiveTab={setActiveTab} />
             <SidebarButton id="theme" icon="🎨" label="Theme & Nav" activeTab={activeTab} setActiveTab={setActiveTab} />
             <SidebarButton id="footer" icon="🦶" label="Footer Manager" activeTab={activeTab} setActiveTab={setActiveTab} />
+            <SidebarButton id="stats" icon="🏆" label="Corporate Stats" activeTab={activeTab} setActiveTab={setActiveTab} />
             <SidebarButton id="users" icon="🛡️" label="Users & Security" activeTab={activeTab} setActiveTab={setActiveTab} />
           </nav>
         </div>
@@ -449,7 +450,12 @@ function AdminApp() {
           <FooterEditor siteData={siteData} token={token} showNotify={showNotify} refetch={fetchSiteData} />
         )}
 
-        {/* TAB 14: USERS & SECURITY */}
+        {/* TAB 14: CORPORATE STATS */}
+        {activeTab === "stats" && (
+          <StatsEditor siteData={siteData} token={token} showNotify={showNotify} refetch={fetchSiteData} />
+        )}
+
+        {/* TAB 15: USERS & SECURITY */}
         {activeTab === "users" && (
           <UsersManager token={token} showNotify={showNotify} />
         )}
@@ -867,6 +873,136 @@ function UsersManager() {
       <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">Admin Users & Audit Security Logs</h3>
       <p className="text-xs text-slate-500">Active Super Admin: admin@idmrstrategies.com (Role: Admin)</p>
     </div>
+  );
+}
+
+// CORPORATE METRICS / STATS EDITOR MODULE
+function StatsEditor({ siteData, token, showNotify, refetch }) {
+  const getInitialStats = () => {
+    const saved = localStorage.getItem("idmr_stats_data");
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) {}
+    }
+    return [
+      { value: "10", suffix: "+", prefix: "", title: "Years of Industry Excellence", sub: "Proven track record since founding" },
+      { value: "50", suffix: "+", prefix: "", title: "Growth Projects Delivered", sub: "Across 20+ specialized industries" },
+      { value: "99.4", suffix: "%", prefix: "", title: "Long-Term Client Retention", sub: "Trusted ongoing partnerships" },
+      { value: "5", suffix: "M+", prefix: "$", title: "Verified Client ROI Generated", sub: "Data-driven performance outcomes" }
+    ];
+  };
+
+  const [stats, setStats] = useState(getInitialStats);
+  const [saving, setSaving] = useState(false);
+
+  const updateCard = (idx, field, val) => {
+    const updated = [...stats];
+    updated[idx] = { ...updated[idx], [field]: val };
+    setStats(updated);
+  };
+
+  const handleSave = async (e) => {
+    if (e) e.preventDefault();
+    setSaving(true);
+
+    try {
+      localStorage.setItem("idmr_stats_data", JSON.stringify(stats));
+      window.dispatchEvent(new Event("storage"));
+    } catch (err) {}
+
+    showNotify("Saving corporate stats live...");
+    const success = await syncToGitHubCMS("stats", stats);
+    if (success) {
+      showNotify("✨ Corporate Metrics saved live on website across all devices!");
+    } else {
+      showNotify("Corporate Stats saved locally in browser!", "warning");
+    }
+    setSaving(false);
+  };
+
+  return (
+    <form onSubmit={handleSave} className="space-y-8">
+      <div className="flex items-center justify-between bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+        <div>
+          <h2 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+            <span>🏆</span> Corporate Stats & Metric Cards
+          </h2>
+          <p className="text-xs text-slate-500">Edit the 4 main corporate achievement metrics displayed on the homepage</p>
+        </div>
+        <button
+          type="submit"
+          disabled={saving}
+          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-extrabold rounded-xl shadow-md shadow-blue-500/25 transition-all transform active:scale-95 flex items-center gap-2"
+        >
+          {saving ? "Saving..." : "💾 Save Corporate Stats"}
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {stats.map((card, idx) => (
+          <div key={idx} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <span className="text-xs font-extrabold text-blue-600 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full">Stat Card #{idx + 1}</span>
+              <span className="text-lg font-black text-slate-900 dark:text-white">{card.prefix}{card.value}{card.suffix}</span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3">
+              <div>
+                <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Prefix</label>
+                <input
+                  type="text"
+                  value={card.prefix || ""}
+                  onChange={(e) => updateCard(idx, "prefix", e.target.value)}
+                  className="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold"
+                  placeholder="e.g. $"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target Value</label>
+                <input
+                  type="text"
+                  value={card.value || ""}
+                  onChange={(e) => updateCard(idx, "value", e.target.value)}
+                  className="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold"
+                  placeholder="e.g. 50"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Suffix</label>
+                <input
+                  type="text"
+                  value={card.suffix || ""}
+                  onChange={(e) => updateCard(idx, "suffix", e.target.value)}
+                  className="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold"
+                  placeholder="e.g. +"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Card Title</label>
+              <input
+                type="text"
+                value={card.title || ""}
+                onChange={(e) => updateCard(idx, "title", e.target.value)}
+                className="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold"
+                placeholder="Card title..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Card Subtitle</label>
+              <input
+                type="text"
+                value={card.sub || ""}
+                onChange={(e) => updateCard(idx, "sub", e.target.value)}
+                className="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400"
+                placeholder="Subtitle text..."
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </form>
   );
 }
 
