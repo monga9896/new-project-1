@@ -629,7 +629,7 @@ body {
   visibility: visible !important;
   opacity: 1 !important;
   margin: 0 auto !important;
-  transform: translateX(24px);
+  transform: translateX(19px);
 }
 
 @keyframes orbitClockwise {
@@ -1258,7 +1258,7 @@ body {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    transform: translateX(22px) !important;
+    transform: translateX(17px) !important;
   }
 
   /* Sleek & Compact 3-Column Glassmorphism Chips for Mobile */
