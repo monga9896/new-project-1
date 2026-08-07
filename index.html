@@ -210,11 +210,14 @@
         <!-- Interactive Animated Canvas -->
         <canvas id="hero-canvas"></canvas>
 
-        <!-- Primary Focal Point: Un-boxed Prominent IDMR Official Logo & Centered Glow Ring -->
+        <!-- Primary Focal Point: Animated IDMR Logo Video & Centered Glow Ring -->
         <div class="hero-logo-standalone-container">
           <!-- Glowing Blue Radial Ring Backdrop (Centered behind logo) -->
           <div class="logo-glow-ring" aria-hidden="true"></div>
-          <img src="assets/official_idmr_logo_transparent.png" alt="IDMR Strategies Official Logo" class="hero-standalone-logo">
+          <video class="hero-animated-logo-video" autoplay loop muted playsinline poster="assets/official_idmr_logo_transparent.png" aria-label="IDMR Strategies Animated Logo Video">
+            <source src="assets/idmr_animated_logo.mp4" type="video/mp4">
+            <img src="assets/official_idmr_logo_transparent.png" alt="IDMR Strategies Official Logo" class="hero-standalone-logo">
+          </video>
         </div>
 
         <!-- Analytics Cards Row Positioned Below Logo -->
