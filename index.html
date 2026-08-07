@@ -18,6 +18,16 @@
   <link rel="stylesheet" href="styles.css">
 
   <script>
+    function closeAllModals() {
+      var modals = document.querySelectorAll('.modal-overlay, #consult-modal, #quote-modal, #services-modal');
+      modals.forEach(function(m) {
+        m.classList.remove('active');
+        m.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;';
+      });
+      document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
+    }
+
     function closeMobileMenu() {
       var toggleBtn = document.getElementById('mobile-toggle');
       var mobileMenu = document.getElementById('mobile-menu');
@@ -37,7 +47,7 @@
         closeMobileMenu();
       } else {
         mobileMenu.classList.add('active');
-        mobileMenu.style.cssText = 'display: flex !important; flex-direction: column !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; position: fixed !important; top: 72px !important; left: 0 !important; right: 0 !important; z-index: 99998 !important; background: #041029 !important; padding: 2rem 2.5rem !important; border-bottom: 2px solid #d4af37 !important; box-shadow: 0 30px 80px rgba(0,0,0,0.9) !important;';
+        mobileMenu.style.cssText = 'display: flex !important; flex-direction: column !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; position: fixed !important; top: 72px !important; left: 0 !important; right: 0 !important; z-index: 99998 !important; background: rgba(4, 16, 41, 0.98) !important; backdrop-filter: blur(25px) !important; -webkit-backdrop-filter: blur(25px) !important; padding: 2rem 2.5rem !important; border-bottom: 2px solid #d4af37 !important; box-shadow: 0 30px 80px rgba(0,0,0,0.9) !important;';
         if (toggleBtn) toggleBtn.classList.add('active');
       }
     }
@@ -47,7 +57,7 @@
       var modal = document.getElementById('consult-modal');
       if (modal) {
         modal.classList.add('active');
-        modal.style.display = 'flex';
+        modal.style.cssText = 'display: flex !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; z-index: 99999 !important;';
       }
     }
 
@@ -56,7 +66,7 @@
       var modal = document.getElementById('services-modal');
       if (modal) {
         modal.classList.add('active');
-        modal.style.display = 'flex';
+        modal.style.cssText = 'display: flex !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; z-index: 99999 !important;';
       } else {
         var el = document.getElementById('services');
         if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -1129,9 +1139,9 @@
   </footer>
 
   <!-- MODAL 1: GET FREE CONSULTATION -->
-  <div class="modal-overlay" id="consult-modal" aria-hidden="true">
+  <div class="modal-overlay" id="consult-modal" aria-hidden="true" onclick="if(event.target===this) closeAllModals()">
     <div class="modal-card">
-      <button class="modal-close" id="close-consult-modal" aria-label="Close modal">&times;</button>
+      <button class="modal-close" id="close-consult-modal" aria-label="Close modal" onclick="closeAllModals()">&times;</button>
       
       <div class="modal-header">
         <div class="modal-badge">GROWTH STRATEGY SESSION</div>
@@ -1183,9 +1193,9 @@
   </div>
 
   <!-- MODAL 2: GET QUOTE -->
-  <div class="modal-overlay" id="quote-modal" aria-hidden="true">
+  <div class="modal-overlay" id="quote-modal" aria-hidden="true" onclick="if(event.target===this) closeAllModals()">
     <div class="modal-card">
-      <button class="modal-close" id="close-quote-modal" aria-label="Close modal">&times;</button>
+      <button class="modal-close" id="close-quote-modal" aria-label="Close modal" onclick="closeAllModals()">&times;</button>
       
       <div class="modal-header">
         <div class="modal-badge gold-badge">PROJECT ESTIMATE</div>
@@ -1231,9 +1241,9 @@
   </div>
 
   <!-- MODAL 3: OUR SERVICES DRAWER -->
-  <div class="modal-overlay" id="services-modal" aria-hidden="true">
+  <div class="modal-overlay" id="services-modal" aria-hidden="true" onclick="if(event.target===this) closeAllModals()">
     <div class="modal-card modal-card-wide">
-      <button class="modal-close" id="close-services-modal" aria-label="Close modal">&times;</button>
+      <button class="modal-close" id="close-services-modal" aria-label="Close modal" onclick="closeAllModals()">&times;</button>
       
       <div class="modal-header text-center">
         <div class="modal-badge">OUR CORE CAPABILITIES</div>

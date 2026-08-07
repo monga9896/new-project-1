@@ -395,11 +395,17 @@ function initModals() {
   const closeServicesBtn = document.getElementById('close-services-modal');
 
   function openModal(modal) {
-    if (modal) modal.classList.add('active');
+    if (modal) {
+      modal.classList.add('active');
+      modal.style.cssText = 'display: flex !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; z-index: 99999 !important;';
+    }
   }
 
   function closeModal(modal) {
-    if (modal) modal.classList.remove('active');
+    if (modal) {
+      modal.classList.remove('active');
+      modal.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;';
+    }
   }
 
   openConsultBtns.forEach(btn => {
@@ -427,6 +433,12 @@ function initModals() {
   if (closeConsultBtn) closeConsultBtn.addEventListener('click', () => closeModal(consultModal));
   if (closeQuoteBtn) closeQuoteBtn.addEventListener('click', () => closeModal(quoteModal));
   if (closeServicesBtn) closeServicesBtn.addEventListener('click', () => closeModal(servicesModal));
+
+  document.querySelectorAll('.modal-close').forEach(btn => {
+    btn.addEventListener('click', () => {
+      [consultModal, quoteModal, servicesModal].forEach(m => closeModal(m));
+    });
+  });
 
   [consultModal, quoteModal, servicesModal].forEach(modal => {
     if (!modal) return;
