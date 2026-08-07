@@ -1080,22 +1080,22 @@ function applyCMSData(data) {
     if (statusPill && f.status_pill_text) statusPill.textContent = f.status_pill_text;
 
     // Contact Details
-    const emailEl = document.querySelector('.footer-info-item a[href^="mailto:"]');
+    const phoneEl = document.querySelector('.footer-phone-link') || document.querySelector('.footer-info-item a[href*="tel"]');
+    if (phoneEl && f.phone_number) {
+      phoneEl.href = 'tel:' + f.phone_number.replace(/[^\d+]/g, '');
+      phoneEl.textContent = f.phone_number;
+    }
+
+    const emailEl = document.querySelector('.footer-email-link') || document.querySelector('.footer-info-item a[href*="mailto"]');
     if (emailEl && f.work_email) {
       emailEl.href = 'mailto:' + f.work_email;
       emailEl.textContent = f.work_email;
     }
 
-    const phoneEl = document.querySelector('.footer-info-item a[href^="tel:"]');
-    if (phoneEl && f.phone_number) {
-      phoneEl.href = 'tel:' + f.phone_number.replace(/\s+/g, '');
-      phoneEl.textContent = f.phone_number;
-    }
-
-    const addressEl = document.querySelector('.footer-info-item:nth-child(1) strong');
+    const addressEl = document.querySelector('.footer-address-text') || document.querySelector('.footer-info-item:nth-child(1) strong');
     if (addressEl && f.office_address) addressEl.textContent = f.office_address;
 
-    const hoursEl = document.querySelector('.footer-info-item:nth-child(4) strong');
+    const hoursEl = document.querySelector('.footer-hours-text') || document.querySelector('.footer-info-item:nth-child(4) strong');
     if (hoursEl && f.working_hours) hoursEl.textContent = f.working_hours;
 
     // Social Links
