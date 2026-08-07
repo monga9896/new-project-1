@@ -646,7 +646,7 @@ function initEcosystemCanvas() {
     phase += 0.012;
 
     const cards = container.querySelectorAll('.eco-node-card');
-    const centerHubRadius = 92;
+    const centerHubRadius = width < 868 ? 78 : 105;
 
     // 1. Draw subtle digital background grid & soft radial glow
     const bgGlow = ctx.createRadialGradient(centerX, centerY, 30, centerX, centerY, width * 0.45);
