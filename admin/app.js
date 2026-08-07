@@ -840,6 +840,23 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
 
   return (
     <form onSubmit={handleSave} className="space-y-8">
+      {/* HEADER BAR WITH TOP SAVE BUTTON */}
+      <div className="flex items-center justify-between bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+        <div>
+          <h2 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+            <span>🦶</span> Footer & Pre-Footer Manager
+          </h2>
+          <p className="text-xs text-slate-500">Edit pre-footer CTA banner, brand bio, social links, contact info, and copyright statement</p>
+        </div>
+        <button
+          type="submit"
+          disabled={saving}
+          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-extrabold rounded-xl shadow-md shadow-blue-500/25 transition-all transform active:scale-95 flex items-center gap-2"
+        >
+          {saving ? "Saving..." : "💾 Save Footer Settings"}
+        </button>
+      </div>
+
       {/* SECTION 1: PRE-FOOTER CTA BANNER */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
         <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
@@ -1107,8 +1124,9 @@ function FooterEditor({ siteData, token, showNotify, refetch }) {
         </div>
       </div>
 
-      {/* ACTION BAR */}
-      <div className="flex items-center justify-end gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+      {/* STICKY BOTTOM ACTION BAR */}
+      <div className="sticky bottom-4 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-2xl flex items-center justify-between">
+        <span className="text-xs font-bold text-slate-500">Footer Settings Management</span>
         <button
           type="submit"
           disabled={saving}
