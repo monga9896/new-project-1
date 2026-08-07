@@ -585,12 +585,13 @@ body {
 /* LIVE LOGO WRAPPER & METALLIC GOLD SHINE SWEEP */
 .logo-wrapper-live {
   position: relative;
+  z-index: 5;
   width: 100%;
+  max-width: 240px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border-radius: 20px;
 }
 
 .logo-holographic-shine {
@@ -611,17 +612,21 @@ body {
   pointer-events: none;
   animation: shineSweep 4s ease-in-out infinite;
   mix-blend-mode: overlay;
-  z-index: 3;
+  z-index: 6;
 }
 
 .hero-standalone-logo {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   width: 100%;
   height: auto;
-  max-height: 200px;
+  max-width: 240px;
+  max-height: 150px;
   object-fit: contain;
   filter: drop-shadow(0 12px 30px rgba(6, 29, 73, 0.12));
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 @keyframes orbitClockwise {
@@ -1225,17 +1230,30 @@ body {
     z-index: 1 !important;
   }
 
+  .logo-wrapper-live {
+    position: relative !important;
+    z-index: 5 !important;
+    width: 100% !important;
+    max-width: 200px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
   /* Standalone Logo: Visually Centered inside the 245px Circle */
   .hero-standalone-logo {
-    max-width: 180px !important;
+    position: relative !important;
+    z-index: 5 !important;
+    width: 100% !important;
+    max-width: 200px !important;
     max-height: 120px !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(calc(-50% + 14px), -50%) !important;
-    z-index: 2 !important;
-    margin: 0 !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 auto !important;
     display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   /* Sleek & Compact 3-Column Glassmorphism Chips for Mobile */
